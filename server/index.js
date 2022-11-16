@@ -9,9 +9,6 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 const port = 3001;
 
-// V3 annual data
-app.get("/v3_annual", async function (req, res) {
-  let sql = "SELECT * FROM v3_annual";
 // read data from database v1 v2
 app.get("/", async function (req, res) {
   let sql = "SELECT * FROM v1_v2";
@@ -24,6 +21,15 @@ app.get("/", async function (req, res) {
 // V3 monthly data
 app.get("/v3_monthly", async function (req, res) {
   let sql = "SELECT * FROM v3_monthly";
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+    res.send(result);
+  })
+})
+
+// V3 annual data
+app.get("/v3_annual", async function (req, res) {
+  let sql = "SELECT * FROM v3_annual";
   connection.query(sql, function (err, result) {
     if (err) throw err;
     res.send(result);
@@ -56,9 +62,6 @@ app.get("/v9_sub_sectors", async function (req, res) {
     res.send(result);
   })
 })
-
-  });
-});
 
 // read data from database v5
 app.get("/v5", async function (req, res) {

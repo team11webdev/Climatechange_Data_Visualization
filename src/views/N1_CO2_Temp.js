@@ -1,4 +1,6 @@
 import V1_v2 from "../components/V1_v2";
+import V3_CO2 from "../components/V3_CO2";
+import V4_CO2 from "../components/V4_CO2";
 import V5 from "../components/V5_CO2";
 import V6 from "../components/V6_CO2";
 import V7 from "../components/V7_V10_Carbon";
@@ -9,14 +11,14 @@ function N1_CO2_TEMP() {
     <>
       <div className={colToggle()}>
         <V1_v2 />
-        <V5></V5>
+        <V3_CO2/>
       </div>
       <div className={colToggle()}>
-        <V6></V6>
+        <V4_CO2/>
         <V7></V7>
       </div>
       <div className={colToggle()}>
-        <V5></V5>
+        <V6></V6>
         <V5></V5>
       </div>
       <div className={colToggle()}>
