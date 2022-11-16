@@ -28,8 +28,6 @@ app.get("/v5", async function (req, res) {
   });
 });
 
-
-
 // read data from database v6
 app.get("/v6", async function (req, res) {
   let sql = "SELECT * FROM v6";
@@ -43,6 +41,15 @@ app.get("/v6", async function (req, res) {
 // read data from database v7
 app.get("/v7", async function (req, res) {
   let sql = "SELECT * FROM v7";
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+
+    res.send(result);
+  });
+});
+//read data from database v8
+app.get("/v8", async function (req, res) {
+  let sql = "SELECT * FROM v8 ";
   connection.query(sql, function (err, result) {
     if (err) throw err;
 
