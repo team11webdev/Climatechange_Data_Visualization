@@ -1,13 +1,9 @@
 import V8 from '../components/V8_CO2_Country';
-import V9 from '../components/V9_CO2_Sector';
  
 function N3_USER_SPECIFIC() {
     return (
      <>
- 
  <h1>test n3</h1>
-  
-
      </>
     );
   }

@@ -1,18 +1,10 @@
-import V8 from '../components/V8_CO2_Country';
-import V9 from '../components/V9_CO2_Sector';
+import V9_CO2_SECTOR from '../components/V9_CO2_Sector'
  
-function N2_EMISSION() {
+export default function N2_EMISSIONS() {
     return (
-     <>
- 
-       <h1>test n2</h1>
-  
-
-     </>
-    );
-  }
-
-  /* <V8/>
-       <V9/>*/
-  
-  export default N2_EMISSION;
+     <div className="view-container">
+        <h1>test n2</h1>
+        <V9_CO2_SECTOR />
+     </div>
+    )
+}

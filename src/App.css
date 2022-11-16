@@ -2,9 +2,14 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.chart-container {
+  margin-left: 350px;
+  margin-right: 350px;
+  margin-bottom: 50px;
+}
+
+.chart-container > h4 {
+  text-align: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
