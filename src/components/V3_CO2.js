@@ -79,13 +79,13 @@ const V3_CO2 = () => {
 
   //console.log(ref_btn.current.innerHTML);
   return (
-    <div className="chart-container">
+    <div className="chart-info-container">
       <h4>V3 Mauna Loa CO2 mean data where CO2 is expressed as a mole fraction in dry air, micromol/mol</h4>
-      <div ref={ref_annual} style={{ display: "block" }}>
+      <div className="chart-container" ref={ref_annual} style={{ display: "block" }}>
         <Line data={data_annual} options={options} height={400} width={850} />
       </div>
 
-      <div ref={ref_monthly} style={{ display: "none" }}>
+      <div className="chart-container" ref={ref_monthly} style={{ display: "none" }}>
         <Line data={data_monthly} options={options} height={400} width={850} />
       </div>
 
