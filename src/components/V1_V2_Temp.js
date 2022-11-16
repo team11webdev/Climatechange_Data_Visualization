@@ -59,24 +59,33 @@ const V1_v2 = () => {
     ],
   };
 
-  var options = {
+   var options = {
+    responsive: true,
     maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true,
       },
     },
-    legend: {
-      labels: {
-        fontSize: 26,
-      },
+    elements: {
+      point:{
+          radius: 0
+      }},
+  legend: {
+    labels: {
+      fontSize: 26,
     },
-  };
+  },
+    spanGaps: true
+  }; 
 
   return (
-    <div>
-      <Line data={data} options={options} height={400} />
+    <div className="chart-info-container" >
+      <div className="chart-container">
+      <Line data={data} options={options} />
+      </div>
     </div>
+    
   );
 };
 

@@ -14,7 +14,7 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Link className='nav-link' to="/">Atmospheric co2 and Temperatures</Link>
-            <Link className='nav-link' to="/emission">Emission Sources</Link>
+            <Link className='nav-link' to="/emissions">Emission Sources</Link>
             <Link className='nav-link' to="/user_specific">Create Custom View</Link>
             <Button variant="light" className='nav-link'>Light</Button>{' '}
           </Nav>

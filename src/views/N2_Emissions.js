@@ -1,13 +1,15 @@
 import V8 from '../components/V8_CO2_Country';
 import V9 from '../components/V9_CO2_Sector';
+import V5 from '../components/V5_CO2'
+import colToggle from '../components/colToggle';
  
 function N2_EMISSION() {
     return (
      <>
- 
-       <h1>test n2</h1>
-  
-
+     <div className={colToggle()}>
+          <V5></V5>
+          <V5></V5>
+     </div>
      </>
     );
   }
