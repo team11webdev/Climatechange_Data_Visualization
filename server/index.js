@@ -12,6 +12,9 @@ const port = 3001;
 // V3 annual data
 app.get("/v3_annual", async function (req, res) {
   let sql = "SELECT * FROM v3_annual";
+// read data from database v1 v2
+app.get("/", async function (req, res) {
+  let sql = "SELECT * FROM v1_v2";
   connection.query(sql, function (err, result) {
     if (err) throw err;
     res.send(result);
@@ -54,6 +57,51 @@ app.get("/v9_sub_sectors", async function (req, res) {
   })
 })
 
+  });
+});
+
+// read data from database v5
+app.get("/v5", async function (req, res) {
+  let sql = "SELECT * FROM v5";
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+
+    res.send(result);
+  });
+});
+
+// read data from database v6
+app.get("/v6", async function (req, res) {
+  let sql = "SELECT * FROM v6";
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+
+    res.send(result);
+  });
+});
+
+// read data from database v7
+app.get("/v7", async function (req, res) {
+  let sql = "SELECT * FROM v7";
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+
+    res.send(result);
+  });
+});
+//read data from database v8
+app.get("/v8", async function (req, res) {
+  let sql = "SELECT * FROM v8 ";
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+
+    res.send(result);
+  });
+});
+
+//listen method
 app.listen(port, function (err) {
   console.log("listening...." + port);
 });
+
+/** */
