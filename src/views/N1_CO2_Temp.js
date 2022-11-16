@@ -12,7 +12,7 @@ function N1_CO2_TEMP() {
   return (
     <>
         <div className={colToggle()}>
-          <V1_v2></V1_v2>
+          <V5></V5>
           <V5></V5>
         </div>
         <div className={colToggle()}>
@@ -20,7 +20,7 @@ function N1_CO2_TEMP() {
           <V7></V7>
         </div>
         <div className={colToggle()}>
-          <V1_v2></V1_v2>
+          <V5></V5>
           <V5></V5>
         </div>
         <div className={colToggle()}>
