@@ -158,9 +158,11 @@ export default function V9_CO2_SECTOR() {
   }
 
   return (
-    <div className='chart-container' >
+    <div className="chart-info-container" >
       <h4>CO2 emissions by sectors</h4>
-      <Doughnut data={sectorData} options={options}/>
+      <div className="chart-container">
+        <Doughnut data={sectorData} options={options}/>
+      </div>
     </div>
   )
 }

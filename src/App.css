@@ -2,16 +2,6 @@
   text-align: center;
 }
 
-.chart-container {
-  margin-left: 350px;
-  margin-right: 350px;
-  margin-bottom: 50px;
-}
-
-.chart-container > h4 {
-  text-align: center;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

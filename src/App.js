@@ -12,7 +12,7 @@ function App() {
      <NavBar />
    <Routes>
        <Route path="/" element={<N1_CO2_TEMP />}/>
-       <Route path="/emission" element={<N2_EMISSION />}/>
+       <Route path="/emissions" element={<N2_EMISSIONS />}/>
        <Route path="/user_specific" element={<N3_USER_SPECIFIC/>}/>
        <Route path="*" element={<N1_CO2_TEMP />}/>
    </Routes>

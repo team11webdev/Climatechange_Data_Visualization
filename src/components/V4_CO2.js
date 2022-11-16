@@ -94,10 +94,10 @@ export default function V4_CO2() {
   }
 
   return (
-    <div className="chart-container">
+    <div className="chart-info-container">
       <h4>V4 Mauna Loa CO2 mean data(from V3) and Antarctic Ice Core records of atmospheric CO2 ratios</h4>
-      <div style={{ display: "block" }}>
-        <Line data={data} options={options} height={400} width={850} />
+      <div className="chart-container" >
+        <Line data={data} options={options}/>
       </div>
     </div>
   )
