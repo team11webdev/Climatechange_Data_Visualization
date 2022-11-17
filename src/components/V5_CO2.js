@@ -12,8 +12,29 @@ import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 
 const URL = "http://localhost:3001/v5";
+const URL_DES = "http://localhost:3001/description";
+
 const V5 = () => {
   const [chart_gasage, setChart_gasage] = useState([]);
+  const [title, setTitle] = useState([]);
+  const [description, setDescription] = useState([]);
+  const [data_link, setData_link] = useState([]);
+  const [description_link, setDescription_link] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(URL_DES)
+      .then((response) => {
+       setTitle(response.data[4].v_title);
+       setDescription(response.data[4].v_description);
+       setData_link(response.data[4].data_link);
+       setDescription_link(response.data[4].description_link);
+      
+      })
+      .catch((error) => {
+        alert(error.response.data.error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -54,12 +75,7 @@ const V5 = () => {
     ],
   };
 
-  var description = {
-    title: "V5 Vostok",
-    description: "V5 Vostok desc",
-    descLink: "https://cdiac.ess-dive.lbl.gov/trends/co2/vostok.html",
-    dataLink: "https://cdiac.ess-dive.lbl.gov/ftp/trends/co2/vostok.icecore.co2"
-  }
+
 
    var options = {
     maintainAspectRatio: false,
@@ -82,13 +98,15 @@ const V5 = () => {
 
   return (
     <div className="chart-info-container" >
-      <h3>{description.title}</h3>
+      <h3>V5-{title}</h3>
         <div className="chart-container">
             <Line data={data} options={options}/>
         </div>
         <div className="chart-info">{description.description}</div>
-      <a href={description.descLink} className="chart-info">Description</a>
-      <a href={description.dataLink} className="chart-info">Data Source</a>
+        <p>Introduction: {description}</p>
+        <a href={data_link} className="chart-info">Data source</a>
+        <br />
+        <a href={description_link} className="chart-info">Data description</a>
     </div>
   );
 };

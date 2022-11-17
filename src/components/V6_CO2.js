@@ -12,8 +12,28 @@ import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 
 const URL = "http://localhost:3001/v6";
+const URL_DES = "http://localhost:3001/description";
+
 const V6 = () => {
   const [chart_co2, setChart_co2] = useState([]);
+  const [title, setTitle] = useState([]);
+  const [description, setDescription] = useState([]);
+  const [data_link, setData_link] = useState([]);
+  const [description_link, setDescription_link] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(URL_DES)
+      .then((response) => {
+        setTitle(response.data[5].v_title);
+        setDescription(response.data[5].v_description);
+        setData_link(response.data[5].data_link);
+        setDescription_link(response.data[5].description_link);
+      })
+      .catch((error) => {
+        alert(error.response.data.error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -54,13 +74,6 @@ const V6 = () => {
     ],
   };
 
-  var description = {
-    title: "V6 Ice Core 800K",
-    description: "V6  Ice core 800k year composite study CO2 measurements  lduhfvlisuehurghvelsuvnelsuiThe color of the grid lines. If specified as an array, the first color applies to the first grid line, the second to the second grid line, and so on.",
-    descLink: "https://www.ncei.noaa.gov/access/paleo-search/study/17975",
-    dataLink: "https://www.ncei.noaa.gov/pub/data/paleo/icecore/antarctica/antarctica2015co2composite.txt"
-  }
-
   var options = {
     maintainAspectRatio: false,
     scales: {
@@ -69,27 +82,30 @@ const V6 = () => {
       },
     },
     elements: {
-      point:{
-          radius: 0
-      }},
-  legend: {
-    labels: {
-      fontSize: 26,
+      point: {
+        radius: 0,
+      },
     },
-  },
-    spanGaps: true
+    legend: {
+      labels: {
+        fontSize: 26,
+      },
+    },
+    spanGaps: true,
   };
 
   return (
     <div className="chart-info-container">
-      <h3>{description.title}</h3>
+      <h3>V6-{title}</h3>
         <div className="chart-container">
-            <Line data={data} options={options} />
+            <Line data={data} options={options}/>
         </div>
         <div className="chart-info">{description.description}</div>
-      <a href={description.descLink} className="chart-info">Description</a>
-      <a href={description.dataLink} className="chart-info">Data Source</a>
-    </div>
+        <p>Introduction: {description}</p>
+        <a href={data_link} className="chart-info">Data source</a>
+        <br />
+        <a href={description_link} className="chart-info">Data description</a>
+        </div>
   );
 };
 

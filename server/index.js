@@ -102,6 +102,16 @@ app.get("/v8", async function (req, res) {
   });
 });
 
+//read data from database v8
+app.get("/description", async function (req, res) {
+  let sql = "SELECT * FROM description ";
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+
+    res.send(result);
+  });
+});
+
 //listen method
 app.listen(port, function (err) {
   console.log("listening...." + port);

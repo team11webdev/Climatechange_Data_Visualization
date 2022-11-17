@@ -11,11 +11,30 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 
 const URL_sectors = "http://localhost:3001/v9_sectors"
 const URL_sub_sectors = "http://localhost:3001/v9_sub_sectors"
+const URL_DES = "http://localhost:3001/description";
 
 export default function V9_CO2_SECTOR() {
 
   const [sectors, setSectors] = useState([])
   const [subSectors, setSubSectors] = useState([])
+  const [title, setTitle] = useState([]);
+  const [description, setDescription] = useState([]);
+  const [data_link, setData_link] = useState([]);
+  const [description_link, setDescription_link] = useState([]);
+  useEffect(() => {
+    axios
+      .get(URL_DES)
+      .then((response) => {
+       setTitle(response.data[8].v_title);
+       setDescription(response.data[8].v_description);
+       setData_link(response.data[8].data_link);
+       setDescription_link(response.data[8].description_link);
+      
+      })
+      .catch((error) => {
+        alert(error.response.data.error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -161,10 +180,17 @@ export default function V9_CO2_SECTOR() {
 
   return (
     <div className="chart-info-container" >
-      <h4>CO2 emissions by sectors</h4>
+      <h3>V9-{title}</h3>
       <div className="chart-container">
         <Doughnut data={sectorData} options={options}/>
       </div>
+      <div className="chart-description">
+      
+      
+      <p>Introduction: {description}</p>
+      <a href={data_link }>Data source</a><br/>
+      <a href={description_link}>Data description</a>
+    </div>
     </div>
   )
 }

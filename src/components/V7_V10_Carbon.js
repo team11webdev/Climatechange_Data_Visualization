@@ -12,8 +12,30 @@ import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 
 const URL = "http://localhost:3001/v7";
+const URL_DES = "http://localhost:3001/description";
+
 const V7 = () => {
   const [chart_co2, setChart_co2] = useState([]);
+  const [title, setTitle] = useState([]);
+  const [description, setDescription] = useState([]);
+  const [data_link, setData_link] = useState([]);
+  const [description_link, setDescription_link] = useState([]);
+
+
+  useEffect(() => {
+    axios
+      .get(URL_DES)
+      .then((response) => {
+       setTitle(response.data[6].v_title);
+       setDescription(response.data[6].v_description);
+       setData_link(response.data[6].data_link);
+       setDescription_link(response.data[6].description_link);
+      
+      })
+      .catch((error) => {
+        alert(error.response.data.error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -84,12 +106,7 @@ const V7 = () => {
     ],
   };
 
-  var description = {
-    title: "V7",
-    description: "V7 + V10 (notyet)  WRONG COLUMN. IT'S 50%, NOT 97.5% GO FIX DATABASE",
-    descLink: "https://climate.fas.harvard.edu/files/climate/files/snyder_2016.pdf",
-    dataLink: "https://oamk-my.sharepoint.com/:w:/g/personal/lassehav_oamk_fi/EQNurDErbVxFtkHSsM1IDaUB-I948CtfTnUlEEkuFjrSRQ?e=e0IxiS"
-  }
+
 
   var options = {
     maintainAspectRatio: false,
@@ -138,14 +155,20 @@ const V7 = () => {
 
   return (
     <div className="chart-info-container" >
-      <h3>{description.title}</h3>
+      <h3>V7-{title}</h3>
         <div className="chart-container">
             <Line data={data} options={options} />
         </div>
+        <h3>V7-{title}</h3>
+        <div className="chart-container">
+            <Line data={data} options={options}/>
+        </div>
         <div className="chart-info">{description.description}</div>
-      <a href={description.descLink} className="chart-info">Description</a>
-      <a href={description.dataLink} className="chart-info">Data Source</a>
-    </div>
+        <p>Introduction: {description}</p>
+        <a href={data_link} className="chart-info">Data source</a>
+        <br />
+        <a href={description_link} className="chart-info">Data description</a>
+        </div>
   );
 };
 

@@ -8,6 +8,7 @@ import Button from 'react-bootstrap/Button'
 
 const URL_Annual = "http://localhost:3001/v3_annual"
 const URL_Monthly = "http://localhost:3001/v3_monthly"
+const URL_DES = "http://localhost:3001/description";
 
 const V3_CO2 = () => {
   const [annual, setAnnual] = useState([])
@@ -15,6 +16,27 @@ const V3_CO2 = () => {
   const ref_annual = useRef(null)
   const ref_monthly = useRef(null)
   const ref_btn = useRef(null)
+
+  const [title, setTitle] = useState([]);
+  
+  const [description, setDescription] = useState([]);
+  const [data_link, setData_link] = useState([]);
+  const [description_link, setDescription_link] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(URL_DES)
+      .then((response) => {
+       setTitle(response.data[2].v_title);
+       setDescription(response.data[2].v_description);
+       setData_link(response.data[2].data_link);
+       setDescription_link(response.data[2].description_link);
+      
+      })
+      .catch((error) => {
+        alert(error.response.data.error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -82,7 +104,7 @@ const V3_CO2 = () => {
   //console.log(ref_btn.current.innerHTML);
   return (
     <div className="chart-info-container">
-      <h4>V3 Mauna Loa CO2 mean data where CO2 is expressed as a mole fraction in dry air, micromol/mol</h4>
+      <h4>V3-{title}</h4>
       <div className="chart-container" ref={ref_annual} style={{ display: "block" }}>
         <Line data={data_annual} options={options} height={400} width={850} />
       </div>
@@ -103,6 +125,13 @@ const V3_CO2 = () => {
         }
         ref={ref_btn}
       > Show Monthly </Button>
+
+<div className="chart-description">
+        
+        <p>Introduction: {description}</p>
+        <a href={data_link }>Data source</a><br/>
+        <a href={description_link}>Data description</a>
+      </div>
     </div>
   );
 };

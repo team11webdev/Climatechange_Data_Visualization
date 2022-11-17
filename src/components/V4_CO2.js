@@ -8,12 +8,34 @@ import Chart from "chart.js/auto"
 import {CategoryScale} from 'chart.js'
 
 const URL = "http://localhost:3001/v4_v10"
+const URL_DES = "http://localhost:3001/description";
+
 
 Chart.register(CategoryScale)
 
 export default function V4_CO2() {
   const [values, setValues] = useState([])
   const [currentEvent, setCurrentEvent] = useState([])
+
+  const [title, setTitle] = useState([]);
+  const [description, setDescription] = useState([]);
+  const [data_link, setData_link] = useState([]);
+  const [description_link, setDescription_link] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(URL_DES)
+      .then((response) => {
+       setTitle(response.data[3].v_title);
+       setDescription(response.data[3].v_description);
+       setData_link(response.data[3].data_link);
+       setDescription_link(response.data[3].description_link);
+      
+      })
+      .catch((error) => {
+        alert(error.response.data.error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -115,9 +137,15 @@ export default function V4_CO2() {
 
   return (
     <div className="chart-info-container">
-      <h4>V4 Mauna Loa CO2 mean data(from V3) and Antarctic Ice Core records of atmospheric CO2 ratios</h4>
+      <h4>V4-{title}</h4>
       <div className="chart-container" >
         <Line data={data} options={options}/>
+      </div>
+      <div className="chart-description">
+        <p>Introduction: {description}</p>
+        <a href={data_link}>Data source</a>
+        <br />
+        <a href={description_link}>Data description</a>
       </div>
     </div>
   )
