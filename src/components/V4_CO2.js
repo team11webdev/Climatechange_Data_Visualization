@@ -1,3 +1,5 @@
+//Assigned to: Nenna
+
 import React from "react"
 import { useEffect, useState } from "react"
 import axios from "axios"
@@ -11,6 +13,7 @@ Chart.register(CategoryScale)
 
 export default function V4_CO2() {
   const [values, setValues] = useState([])
+  const [currentEvent, setCurrentEvent] = useState([])
 
   useEffect(() => {
     axios
@@ -29,40 +32,56 @@ export default function V4_CO2() {
       {
         label: "Mauna Loa CO2 annual mean data (CO2 expressed as a mole fraction in dry air, micromol/mol)",
         data: values.map((x) => x.Annual_mean),//.filter(Boolean),
-        borderColor: ['rgba(255, 99, 132, 1)'],
-        borderWidth: 2,
+        borderColor: ['#FF9671'],
+        borderWidth: 2
       },
       {
         label: "DE08 Ice core",
         data: values.map((x) => x.DE08),
-        borderColor: ['rgba(54, 162, 235, 1)'],
-        borderWidth: 2,
+        borderColor: ['#FFC75F'],
+        borderWidth: 2
       },
       {
         label: "DE08-02 Ice core",
         data: values.map((x) => x.DE08_02),
-        borderColor: ['rgba(255, 206, 86, 1)'],
-        borderWidth: 2,
+        borderColor: ['#845EC2'],
+        borderWidth: 2
       },
       {
         label: "DSS Ice core",
         data: values.map((x) => x.DSS),
-        borderColor: ['rgba(75, 192, 192, 1)'],
-        borderWidth: 2,
+        borderColor: ['#FF6F91'],
+        borderWidth: 2
       },
       {
         label: "Human Evolution and Activities related to CO2 and temperature",
         data: values.map((x) => x.Event_value),
-        borderColor: ['black'],
+        borderColor: ['#D65DB1'],
         borderWidth: 1,
         pointRadius: 4,
         fill: false,
-        showLine: false
+        showLine: false,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: ['#D65DB1']
         }
     ],
   }
 
   var options = {
+    onHover: (e, activeElement) => {
+      //let datasetIndex = activeElement[0].datasetIndex
+      let dataIndex = activeElement[0].index
+      //let datasetLabel = e.chart.data.datasets[datasetIndex].label
+      //let value = e.chart.data.datasets[datasetIndex].data[dataIndex]
+      //let label = e.chart.data.labels[dataIndex]
+      //console.log("In click", datasetLabel, label, value, dataIndex)
+      values.map((s, indx) => {
+        if(indx === dataIndex){
+          setCurrentEvent(s.Event)
+        }
+        return null
+      })
+    },
     scales: {
     },
     elements: {
@@ -77,19 +96,20 @@ export default function V4_CO2() {
     spanGaps: true,
     plugins: {
         tooltip: {
-          //enabled: false
+          events: ['click', 'mouseout', 'mousemove'],
+          //enabled: false,
           callbacks: {
             title:  (context) => {
-              return 'Human Evolution and Activities related to CO2 and temperature'
+              return context[0].dataset.label
             },
             label: (context) => {
               return context.label
             },
             afterLabel: (context) => {
-              return 'This is the index: ' + context.dataIndex
+              return currentEvent
             }
           }
-        } 
+        }
     }
   }
 
