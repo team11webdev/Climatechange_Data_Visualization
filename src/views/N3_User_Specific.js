@@ -13,22 +13,22 @@ function N3_USER_SPECIFIC() {
             <h3>Created Custom Views</h3>
             <div id={customID} className='created-custom-views'>
                 <div className='custom-view-info'>
-                    <div>{customID} - </div>
+                    <p>{customID} - </p>
                     <a href={URL + customURL}>{URL + customURL}</a>
-                    <div>Copy link</div>
-                    <div>Delete</div>
+                    <p>Copy link</p>
+                    <p>Delete</p>
                 </div>
                 <div id={customID} className='custom-view-info'>
-                    <div>{customID} - </div>
+                    <p>{customID} - </p>
                     <a href={URL + customURL}>{URL + customURL}</a>
-                    <div>Copy link</div>
-                    <div>Delete</div>
+                    <p>Copy link</p>
+                    <p>Delete</p>
                 </div>
                 <div id={customID} className='custom-view-info'>
-                    <div>{customID} - </div>
+                    <p>{customID} - </p>
                     <a href={URL + customURL}>{URL + customURL}</a>
-                    <div>Copy link</div>
-                    <div>Delete</div>
+                    <p>Copy link</p>
+                    <p>Delete</p>
                 </div>
             </div>
 
@@ -103,7 +103,7 @@ function N3_USER_SPECIFIC() {
         </div>
 
 
-        <form className="user-deletor">
+        <form className="user-deleter">
         <input type="submit" value="Delete User"></input>
         </form>
 

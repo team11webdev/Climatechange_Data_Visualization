@@ -7,7 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function NavBar() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar expand="lg" className='whole-nav'>
       <Container>
         <Link className='nav-link' to="/">Climate Change Visualisation</Link>  
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
