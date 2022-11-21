@@ -5,7 +5,7 @@
 
 function colToggle() {
     var rowNum = "row-1"
-    if (false) {
+    if (true) {
       rowNum = "row-1"
     } else {
       rowNum = "row-2"

@@ -86,9 +86,9 @@ const V5 = () => {
         <div className="chart-container">
             <Line data={data} options={options}/>
         </div>
-        <div className="chart-description">{description.description}</div>
-      <a href={description.descLink}>Description</a>
-      <a href={description.dataLink}>Data Source</a>
+        <div className="chart-info">{description.description}</div>
+      <a href={description.descLink} className="chart-info">Description</a>
+      <a href={description.dataLink} className="chart-info">Data Source</a>
     </div>
   );
 };
