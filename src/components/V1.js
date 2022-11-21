@@ -157,12 +157,14 @@ const V1 = () => {
       >
         Go Monthly
       </button>
-      <div className="chart-description">
+      <div className="chart-info">{description.description}</div>
         <p>Introduction: {description}</p>
-        <a href={data_link }>Data source</a><br/>
-        <a href={description_link}>Data description</a>
-      </div>
+        <a href={data_link} className="chart-info">Data source</a>
+        <br />
+        <a href={description_link} className="chart-info">Data description</a>
+        
     </div>
+    
   );
 };
 

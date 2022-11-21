@@ -21,16 +21,14 @@ const V7 = () => {
   const [data_link, setData_link] = useState([]);
   const [description_link, setDescription_link] = useState([]);
 
-
   useEffect(() => {
     axios
       .get(URL_DES)
       .then((response) => {
-       setTitle(response.data[6].v_title);
-       setDescription(response.data[6].v_description);
-       setData_link(response.data[6].data_link);
-       setDescription_link(response.data[6].description_link);
-      
+        setTitle(response.data[6].v_title);
+        setDescription(response.data[6].v_description);
+        setData_link(response.data[6].data_link);
+        setDescription_link(response.data[6].description_link);
       })
       .catch((error) => {
         alert(error.response.data.error);
@@ -76,37 +74,21 @@ const V7 = () => {
       {
         label: "CO2 ppm",
         data: chart_co2.map((x) => x.carbon_dioxide_ppm),
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
+        backgroundColor: ["rgba(255, 206, 86, 0.2)"],
+        borderColor: ["rgba(255, 206, 86, 1)"],
         borderWidth: 1,
       },
       {
         label: "Human Evolution and Activities related to CO2 and temperature",
         data: chart_co2.map((x) => x.notable_events),
-        borderColor: ['black'],
+        borderColor: ["black"],
         borderWidth: 1,
         pointRadius: 4,
         fill: false,
-        showLine: false
-        }
+        showLine: false,
+      },
     ],
   };
-
-
 
   var options = {
     maintainAspectRatio: false,
@@ -115,9 +97,9 @@ const V7 = () => {
         beginAtZero: true,
       },
       y1: {
-        type: 'linear',
+        type: "linear",
         display: true,
-        position: 'right',
+        position: "right",
 
         // grid line settings
         grid: {
@@ -126,9 +108,10 @@ const V7 = () => {
       },
     },
     elements: {
-        point:{
-            radius: 0
-        }},
+      point: {
+        radius: 0,
+      },
+    },
     legend: {
       labels: {
         fontSize: 26,
@@ -139,38 +122,41 @@ const V7 = () => {
       tooltip: {
         //enabled: false
         callbacks: {
-          title:  (context) => {
-            return 'Human Evolution and Activities related to CO2 and temperature'
+          title: (context) => {
+            return "Human Evolution and Activities related to CO2 and temperature";
           },
           label: (context) => {
-            return context.label
+            return context.label;
           },
           afterLabel: (context) => {
-            return 'This is the index: ' + context.dataIndex
-          }
-        }
-      } 
-  }
+            return "This is the index: " + context.dataIndex;
+          },
+        },
+      },
+    },
   };
 
   return (
-    <div className="chart-info-container" >
+    <div className="chart-info-container">
       <h3>V7-{title}</h3>
-        <div className="chart-container">
-            <Line data={data} options={options} />
-        </div>
-        <h3>V7-{title}</h3>
-        <div className="chart-container">
-            <Line data={data} options={options}/>
-        </div>
-        <div className="chart-info">{description.description}</div>
-        <p>Introduction: {description}</p>
-        <a href={data_link} className="chart-info">Data source</a>
-        <br />
-        <a href={description_link} className="chart-info">Data description</a>
-        </div>
+      <div className="chart-container">
+        <Line data={data} options={options} />
+      </div>
+      <h3>V7-{title}</h3>
+      <div className="chart-container">
+        <Line data={data} options={options} />
+      </div>
+      <div className="chart-info">{description.description}</div>
+      <p>Introduction: {description}</p>
+      <a href={data_link} className="chart-info">
+        Data source
+      </a>
+      <br />
+      <a href={description_link} className="chart-info">
+        Data description
+      </a>
+    </div>
   );
 };
 
 export default V7;
-

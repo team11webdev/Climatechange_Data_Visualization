@@ -80,13 +80,14 @@ const V1_v2 = () => {
         <Line data={data_year} options={options} height={400} width={850} />
       </div>
 
-      <div className="chart-description">
+      <div className="chart-info">{description.description}</div>
         <p>Introduction: {description}</p>
-        <a href={data_link}>Data source</a>
+        <a href={data_link} className="chart-info">Data source</a>
         <br />
-        <a href={description_link}>Data description</a>
-      </div>
+        <a href={description_link} className="chart-info">Data description</a>
+        
     </div>
+   
   );
 };
 
