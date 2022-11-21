@@ -8,7 +8,7 @@ function NavBar() {
   return (
     <Navbar expand="lg" className='whole-nav'>
       <Container>
-        <Link className='nav-link' to="/">Climate Change Visualisation</Link>  
+        <Link className='nav-link' to="/" id='main-link'>:C</Link> 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

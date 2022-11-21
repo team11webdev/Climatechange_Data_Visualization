@@ -7,8 +7,8 @@ function N2_EMISSION() {
   return (
     <>
       <div className={colToggle()}>
-        <V8 />
-        <V9_CO2_SECTOR/>
+        <V5></V5>
+        <V5></V5>
       </div>
     </>
   );

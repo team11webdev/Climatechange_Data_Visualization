@@ -28,11 +28,11 @@ const V7 = () => {
   }, []);
 
   var data = {
-    labels: chart_co2.map((x) => x.time_yr_bp),
+    labels: chart_co2.map((x) => x.Time_yr_BP),
     datasets: [
       {
-        label: "97.5%",
-        data: chart_co2.map((x) => x.pre97point5),
+        label: "50%",
+        data: chart_co2.map((x) => x.percent50),
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -72,11 +72,20 @@ const V7 = () => {
         ],
         borderWidth: 1,
       },
+      {
+        label: "Human Evolution and Activities related to CO2 and temperature",
+        data: chart_co2.map((x) => x.notable_events),
+        borderColor: ['black'],
+        borderWidth: 1,
+        pointRadius: 4,
+        fill: false,
+        showLine: false
+        }
     ],
   };
 
   var description = {
-    title: "V6 Ice Core 800K",
+    title: "V7",
     description: "V7 + V10 (notyet)  WRONG COLUMN. IT'S 50%, NOT 97.5% GO FIX DATABASE",
     descLink: "https://climate.fas.harvard.edu/files/climate/files/snyder_2016.pdf",
     dataLink: "https://oamk-my.sharepoint.com/:w:/g/personal/lassehav_oamk_fi/EQNurDErbVxFtkHSsM1IDaUB-I948CtfTnUlEEkuFjrSRQ?e=e0IxiS"
@@ -108,7 +117,23 @@ const V7 = () => {
         fontSize: 26,
       },
     },
-    spanGaps: true
+    spanGaps: true,
+    plugins: {
+      tooltip: {
+        //enabled: false
+        callbacks: {
+          title:  (context) => {
+            return 'Human Evolution and Activities related to CO2 and temperature'
+          },
+          label: (context) => {
+            return context.label
+          },
+          afterLabel: (context) => {
+            return 'This is the index: ' + context.dataIndex
+          }
+        }
+      } 
+  }
   };
 
   return (
@@ -117,9 +142,9 @@ const V7 = () => {
         <div className="chart-container">
             <Line data={data} options={options} />
         </div>
-        <div className="chart-description">{description.description}</div>
-      <a href={description.descLink}>Description</a>
-      <a href={description.dataLink}>Data Source</a>
+        <div className="chart-info">{description.description}</div>
+      <a href={description.descLink} className="chart-info">Description</a>
+      <a href={description.dataLink} className="chart-info">Data Source</a>
     </div>
   );
 };
