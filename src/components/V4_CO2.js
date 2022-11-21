@@ -42,12 +42,13 @@ export default function V4_CO2() {
       .get(URL)
       .then((response) => {
         setValues(response.data)
+        console.log(response.data);
       })
       .catch((error) => {
         alert(error.response.data.error);
       })
   }, [])
-  
+ 
   var data = {
     labels: values.map((x) => x.Time),
     datasets: [
@@ -105,6 +106,9 @@ export default function V4_CO2() {
       })
     },
     scales: {
+      x:{
+        beginAtZero:false,
+      }
     },
     elements: {
       point:{

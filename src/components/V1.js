@@ -45,7 +45,7 @@ const V1 = () => {
         alert(error.response.data.error);
       });
   }, []);
-
+  
   var data_month = {
     labels: chart_tem_month.map((x) => x.Time_month),
 

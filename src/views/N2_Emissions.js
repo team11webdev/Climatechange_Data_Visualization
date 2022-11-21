@@ -1,6 +1,6 @@
 import V8 from "../components/V8";
 import V9_CO2_SECTOR from "../components/V9_CO2_Sector";
-import V5 from "../components/V5_CO2";
+
 import colToggle from "../components/colToggle";
 
 function N2_EMISSION() {
