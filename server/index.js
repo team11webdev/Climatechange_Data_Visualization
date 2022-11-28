@@ -5,21 +5,110 @@ const app = express();
 const bodyParser = require("body-parser");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
+const BasicStrategy = require("passport-http").BasicStrategy;
+const jwt = require("jsonwebtoken");
+const JwtStrategy = require("passport-jwt").Strategy,
+  ExtractJwt = require("passport-jwt").ExtractJwt;
 
 const port = 3001;
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+/*********************************************
+ * HTTP Basic Authentication
+ * Passport module used
+ * http://www.passportjs.org/packages/passport-http/
+ ********************************************/
 
+passport.use(
+  new BasicStrategy(function (username, password, done) {
+    console.log("username:" + username);
+    console.log("password:" + password);
+    // search matching username from our user table
+    connection.query(
+      `SELECT * FROM User WHERE Username="${username}"`,
+      function (err, results, fields) {
+        const userInfo = results;
+        console.log(userInfo);
+        // if match is found , comparte the passwords
+        if (userInfo != null) {
+          // if passwords match, then proceed to route handler (the proceed resource)
+          if (bcrypt.compareSync(password, userInfo[0].Password) == true) {
+            done(null, userInfo[0]);
+          } else {
+            // reject the request
+            done(null, false);
+          }
+        } else {
+          // reject the request
+          done(null, false);
+        }
+      }
+    );
+  })
+);
+
+const jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: "mysecretkey",
+};
+passport.use(
+  new JwtStrategy(jwtOptions, function (jwt_payload, done) {
+    console.log("JWT is valid");
+    console.log("payload is as follows");
+    console.log(jwt_payload);
+    done(null, jwt_payload);
+  })
+);
+
+app.post(
+  "/jwtLogin",
+  //check username and password
+  passport.authenticate("basic", { session: false }),
+  (req, res) => {
+    console.log(req.user.Email);
+
+    // generate JWT token
+    const payload = {
+      user: {
+        id: req.user.User_id,
+        Email: req.user.Email,
+        Username: req.user.Username,
+      },
+    };
+    const secretKey = "mysecretkey";
+    const options = {
+      expiresIn: "1d",
+    };
+    const generatedJWT = jwt.sign(payload, secretKey, options);
+    //store JWT at localStorage
+
+    // send JWT as a response
+
+    res.json({ jwt: generatedJWT });
+  }
+);
+
+//get user-pecific view
+app.get(
+  "/user_specific",
+  passport.authenticate("jwt", { session: false }),
+
+  (req, res) => {
+    console.log(req.user);
+    res.send("Hello protected world");
+  }
+);
 // read data from database v1 v2
 app.get("/", async function (req, res) {
   let sql = "SELECT * FROM v1_v2";
   connection.query(sql, function (err, result) {
     if (err) throw err;
     res.send(result);
-  })
-})
+  });
+});
 
 // V3 monthly data
 app.get("/v3_monthly", async function (req, res) {
@@ -27,8 +116,8 @@ app.get("/v3_monthly", async function (req, res) {
   connection.query(sql, function (err, result) {
     if (err) throw err;
     res.send(result);
-  })
-})
+  });
+});
 
 // V3 annual data
 app.get("/v3_annual", async function (req, res) {
@@ -36,8 +125,8 @@ app.get("/v3_annual", async function (req, res) {
   connection.query(sql, function (err, result) {
     if (err) throw err;
     res.send(result);
-  })
-})
+  });
+});
 
 // V4 and V10
 app.get("/v4_v10", async function (req, res) {
@@ -45,8 +134,8 @@ app.get("/v4_v10", async function (req, res) {
   connection.query(sql, function (err, result) {
     if (err) throw err;
     res.send(result);
-  })
-})
+  });
+});
 
 // V9 Sectors
 app.get("/v9_sectors", async function (req, res) {
@@ -54,8 +143,8 @@ app.get("/v9_sectors", async function (req, res) {
   connection.query(sql, function (err, result) {
     if (err) throw err;
     res.send(result);
-  })
-})
+  });
+});
 
 // V9 Sub-Sectors
 app.get("/v9_sub_sectors", async function (req, res) {
@@ -63,8 +152,8 @@ app.get("/v9_sub_sectors", async function (req, res) {
   connection.query(sql, function (err, result) {
     if (err) throw err;
     res.send(result);
-  })
-})
+  });
+});
 
 // read data from database v5
 app.get("/v5", async function (req, res) {
@@ -113,45 +202,47 @@ app.get("/description", async function (req, res) {
   });
 });
 
-//listen method
-app.listen(port, function (err) {
-  console.log("listening...." + port);
-});
-
 //-------SIGNUP (create a new user and store it in the database with unique id and hashed password)---------
 app.post("/signup", (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
 
-  if('username' in req.body == false ) {
+  if ("username" in req.body == false) {
     res.status(400);
-    res.json({status: "Missing username from body"})
+    res.json({ status: "Missing username from body" });
     return;
   }
-  if('password' in req.body == false ) {
+  if ("password" in req.body == false) {
     res.status(400);
-    res.json({status: "Missing password from body"})
+    res.json({ status: "Missing password from body" });
     return;
   }
-  if('email' in req.body == false ) {
+  if ("email" in req.body == false) {
     res.status(400);
-    res.json({status: "Missing email from body"})
+    res.json({ status: "Missing email from body" });
     return;
   }
 
   //Create hash of the password with salt
-  const salt = bcrypt.genSaltSync(6)
-  const passwordHash = bcrypt.hashSync(req.body.password, salt)
+  const salt = bcrypt.genSaltSync(6);
+  const passwordHash = bcrypt.hashSync(req.body.password, salt);
 
   const newUser = {
     id: uuidv4(),
     email: req.body.email,
     username: req.body.username,
-    password: passwordHash
-  }
+    password: passwordHash,
+  };
 
-  console.log(newUser)
-  connection.query(`INSERT INTO User(User_id, Email, Username, Password) VALUES ('${newUser.id}', '${newUser.email}', '${newUser.username}', '${newUser.password}')`, res);
+  console.log(newUser);
+  connection.query(
+    `INSERT INTO User(User_id, Email, Username, Password) VALUES ('${newUser.id}', '${newUser.email}', '${newUser.username}', '${newUser.password}')`,
+    res
+  );
 
-  res.status(201).json({ status: "user created" })
-})
+  res.status(201).json({ status: "user created" });
+});
 //------------------------------------------------------------------------------------------------------
+//listen method
+app.listen(port, function (err) {
+  console.log("listening...." + port);
+});
