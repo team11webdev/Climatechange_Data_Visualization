@@ -2,7 +2,6 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import {Link} from 'react-router-dom'
-import Button from 'react-bootstrap/Button'
 
 function NavBar() {
   return (
@@ -15,7 +14,7 @@ function NavBar() {
             <Link className='nav-link' to="/">Atmospheric co2 and Temperatures</Link>
             <Link className='nav-link' to="/emissions">Emission Sources</Link>
             <Link className='nav-link' to="/user_specific">Create Custom View</Link>
-            <Button variant="light" className='nav-link'>Light</Button>{' '}
+            <Link className='nav-link' to="/auth">Signup/Login</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
