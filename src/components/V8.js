@@ -1,16 +1,36 @@
 import React from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import axios from "axios";
 
 import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 
 const URL = "http://localhost:3001/v8";
+const URL_DES = "http://localhost:3001/description";
 function V8() {
   const [country_name, setCountry_name] = useState([]);
   const [country_datas, setCountry_datas] = useState([]);
+  const [title, setTitle] = useState([]);
+  const [description, setDescription] = useState([]);
+  const [data_link, setData_link] = useState([]);
+  const [description_link, setDescription_link] = useState([]);
 
   const ref_country = useRef(null);
   const country_data = [];
+
+  useEffect(() => {
+    axios
+      .get(URL_DES)
+      .then((response) => {
+        setTitle(response.data[7].v_title);
+        setDescription(response.data[7].v_description);
+        setData_link(response.data[7].data_link);
+        setDescription_link(response.data[7].description_link);
+      })
+      .catch((error) => {
+        alert(error.response.data.error);
+      });
+  }, []);
 
   async function show(e) {
     e.preventDefault();
@@ -72,7 +92,7 @@ function V8() {
 
   return (
     <div className="chart-info-container">
-      <h3>V8 CO2 Emissions by Country</h3>
+      <h3>{title}</h3>
       <div className="chart-container">
         <Line data={data} options={options} height={400} width={850} />
         <form onSubmit={show}>
@@ -87,10 +107,15 @@ function V8() {
         </form>
       </div>
 
-      <div className="chart-description">
-        <a>Descrition</a>
-        <a>Data Source</a>
-      </div>
+      <div className="chart-info">{description.description}</div>
+      <p>Introduction: {description}</p>
+      <a href={data_link} className="chart-info">
+        Data source
+      </a>
+      <br />
+      <a href={description_link} className="chart-info">
+        Data description
+      </a>
     </div>
   );
 }

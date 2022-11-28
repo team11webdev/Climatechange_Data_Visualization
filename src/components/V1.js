@@ -5,13 +5,34 @@ import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 
 const URL = "http://localhost:3001/";
+const URL_DES = "http://localhost:3001/description";
 
-const V1_v2 = () => {
+const V1 = () => {
   const [chart_tem_month, setChart_tem_month] = useState([]);
   const [chart_tem_year, setChart_tem_year] = useState([]);
   const ref_year = useRef(null);
   const ref_month = useRef(null);
   const ref_btn = useRef(null);
+  const [title, setTitle] = useState([]);
+
+  const [description, setDescription] = useState([]);
+  const [data_link, setData_link] = useState([]);
+  const [description_link, setDescription_link] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(URL_DES)
+      .then((response) => {
+       setTitle(response.data[0].v_title);
+       setDescription(response.data[0].v_description);
+       setData_link(response.data[0].data_link);
+       setDescription_link(response.data[0].description_link);
+      
+      })
+      .catch((error) => {
+        alert(error.response.data.error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -24,7 +45,7 @@ const V1_v2 = () => {
         alert(error.response.data.error);
       });
   }, []);
-
+  
   var data_month = {
     labels: chart_tem_month.map((x) => x.Time_month),
 
@@ -105,7 +126,7 @@ const V1_v2 = () => {
   //console.log(ref_btn.current.innerHTML);
   return (
     <div className="chart-info-container">
-      <h3>v1_v2 Historical Temperatures</h3>
+      <h3>v1-{title}</h3>
       <div
         ref={ref_year}
         style={{ display: "block" }}
@@ -136,12 +157,15 @@ const V1_v2 = () => {
       >
         Go Monthly
       </button>
-      <div className="chart-description">
-        <a>Descrition</a>
-        <a>Data Source</a>
-      </div>
+      <div className="chart-info">{description.description}</div>
+        <p>Introduction: {description}</p>
+        <a href={data_link} className="chart-info">Data source</a>
+        <br />
+        <a href={description_link} className="chart-info">Data description</a>
+        
     </div>
+    
   );
 };
 
-export default V1_v2;
+export default V1;
