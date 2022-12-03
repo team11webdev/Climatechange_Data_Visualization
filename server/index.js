@@ -173,6 +173,15 @@ app.post("/delete", async function (req, res) {
     res.send(result);
   });
 });
+//delete view
+app.post("/deleteview", async function (req, res) {
+  const deleteView = req.body.viewid;
+  let sql = `DELETE FROM customise WHERE customiseid='${deleteView}'`;
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
 // read data from database v1 v2
 app.get("/", async function (req, res) {
   let sql = "SELECT * FROM v1_v2";

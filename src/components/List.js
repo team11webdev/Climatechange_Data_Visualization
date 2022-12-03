@@ -39,6 +39,21 @@ function List(props) {
     const receivedViewId = localStorage.getItem(viewId);
     console.log(receivedViewId);
   };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(event.target[0].value);
+    try {
+      const result = await axios.post(Constants.API_ADDRESS + "/deleteview", {
+        viewid: event.target[0].value,
+      });
+
+      setTimeout(() => {
+        navigate("/", { replace: true });
+      }, 1500);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
@@ -46,13 +61,17 @@ function List(props) {
       <ol>
         {list.map((view) => (
           <li key={view.customiseid}>
-            <Link
-              onClick={handleClick}
-              name="viewid"
-              to={`/customise/${view.customiseid}`}
-            >
-              {view.customiseid}
-            </Link>
+            <form onSubmit={handleSubmit}>
+              <Link
+                onClick={handleClick}
+                name="viewid"
+                to={`/customise/${view.customiseid}`}
+              >
+                {view.customiseid}
+              </Link>
+
+              <button value={view.customiseid}>Delete this view</button>
+            </form>
           </li>
         ))}
       </ol>
