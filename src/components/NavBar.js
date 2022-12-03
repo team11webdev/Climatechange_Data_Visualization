@@ -4,6 +4,16 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 
 function NavBar(props) {
+
+  const handleLogOut = async (event) => {
+    try {
+      localStorage.removeItem("jwt");
+      window.location.reload(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Navbar expand="lg" className="whole-nav">
       <Container>
@@ -22,17 +32,10 @@ function NavBar(props) {
             <Link className="nav-link" to="/user_specific">
               Create Custom View
             </Link>
-            <div>
-              {props.userLoggedIn ? (
-                <Link variant="light" className="nav-link">
-                  Logout
-                </Link>
-              ) : (
-                <Link className="nav-link" to="/login">
-                  Login/Signup
-                </Link>
-              )}
-            </div>
+            {localStorage.getItem("jwt") != null ? 
+              <Link className="nav-link" to="/" onClick={handleLogOut}> Logout </Link>
+              : <Link className="nav-link" to="/login"> Login/Signup </Link>
+            }
           </Nav>
         </Navbar.Collapse>
       </Container>
