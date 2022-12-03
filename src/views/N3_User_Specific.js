@@ -20,6 +20,7 @@ function N3_USER_SPECIFIC(props) {
   const [v7_value, setV7_value] = useState(false);
   const [v8_value, setV8_value] = useState(false);
   const [v9_value, setV9_value] = useState(false);
+  const [columns, setColumns] = useState("one");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -45,6 +46,7 @@ function N3_USER_SPECIFIC(props) {
         description08: event.target.description08.value,
         V9: event.target.V9.value,
         description09: event.target.description09.value,
+        columns: event.target.columns.value,
       });
 
       setTimeout(() => {
@@ -179,6 +181,11 @@ function N3_USER_SPECIFIC(props) {
         CO2 emissions by sectors
         <br />
         <input type="text" name="description09"></input>
+        <br />
+        <select name="columns">
+          <option value="one">One column</option>
+          <option value="two">Two columns</option>
+        </select>
         <br />
         <button type="submit" name="">
           Create
