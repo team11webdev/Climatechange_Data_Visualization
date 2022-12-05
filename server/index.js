@@ -229,7 +229,7 @@ app.get("/v6", async function (req, res) {
 
 // read data from database v7
 app.get("/v7", async function (req, res) {
-  let sql = "SELECT * FROM v7";
+  let sql = "SELECT * FROM v7_v10";
   connection.query(sql, function (err, result) {
     if (err) throw err;
     res.send(result);

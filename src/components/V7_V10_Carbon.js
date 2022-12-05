@@ -47,7 +47,7 @@ const V7 = () => {
   }, []);
 
   var data = {
-    labels: chart_co2.map((x) => x.Time_yr_BP),
+    labels: chart_co2.map((x) => x.time_yr_BP),
     datasets: [
       {
         label: "50%",
@@ -141,10 +141,7 @@ const V7 = () => {
       <div className="chart-container">
         <Line data={data} options={options} />
       </div>
-      <h3>V7-{title}</h3>
-      <div className="chart-container">
-        <Line data={data} options={options} />
-      </div>
+
       <div className="chart-info">{description.description}</div>
       <p>Introduction: {description}</p>
       <a href={data_link} className="chart-info">
