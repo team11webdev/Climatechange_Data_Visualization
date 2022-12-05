@@ -49,7 +49,7 @@ app.post("/signup", (req, res) => {
 
   console.log(newUser);
   connection.query(
-    `INSERT INTO User(User_id, Email, Username, Password) VALUES ('${newUser.id}', '${newUser.email}', '${newUser.username}', '${newUser.password}')`,
+    `INSERT INTO user(user_id, email, username, password) VALUES ('${newUser.id}', '${newUser.email}', '${newUser.username}', '${newUser.password}')`,
     res
   );
 
@@ -66,14 +66,14 @@ passport.use(
   new BasicStrategy(function (username, password, done) {
     // search matching username from our user table
     connection.query(
-      `SELECT * FROM User WHERE Username="${username}"`,
+      `SELECT * FROM user WHERE username="${username}"`,
       function (err, results, fields) {
         const userInfo = results;
         console.log(userInfo);
         // if match is found , comparte the passwords
         if (userInfo != null) {
           // if passwords match, then proceed to route handler (the proceed resource)
-          if (bcrypt.compareSync(password, userInfo[0].Password) == true) {
+          if (bcrypt.compareSync(password, userInfo[0].password) == true) {
             done(null, userInfo[0]);
           } else {
             // reject the request
@@ -104,9 +104,9 @@ app.post(
 
     const payload = {
       user: {
-        id: req.user.User_id,
-        Email: req.user.Email,
-        Username: req.user.Username
+        id: req.user.user_id,
+        Email: req.user.email,
+        Username: req.user.username
       },
     };
     const secretKey = "mysecretkey";
@@ -165,7 +165,7 @@ app.post("/delete", async function (req, res) {
   const deleteUser = req.body.userid;
   let sql = `DELETE FROM customise WHERE userid='${deleteUser}'`;
   connection.query(sql, function (err, result) {
-    connection.query(`DELETE FROM User WHERE User_id='${deleteUser}'`);
+    connection.query(`DELETE FROM user WHERE user_id='${deleteUser}'`);
     if (err) throw err;
     res.send(result);
   });
