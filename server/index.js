@@ -64,7 +64,6 @@ app.post("/signup", (req, res) => {
 
 passport.use(
   new BasicStrategy(function (username, password, done) {
-  
     // search matching username from our user table
     connection.query(
       `SELECT * FROM User WHERE Username="${username}"`,
@@ -151,10 +150,11 @@ app.post("/create", (req, res) => {
     description08: req.body.description08,
     V9: req.body.V9,
     description09: req.body.description09,
+    columns: req.body.columns,
   };
 
   connection.query(
-    `INSERT INTO customise (customiseid,userid,view1,description01,view2,description02,view3,description03,view4,description04,view5,description05,view6,description06,view7,description07,view8,description08,view9,description09) VALUES ('${newSpecification.customiseid}','${newSpecification.userid}', '${newSpecification.V1}', '${newSpecification.description01}','${newSpecification.V2}', '${newSpecification.description02}', '${newSpecification.V3}','${newSpecification.description03}','${newSpecification.V4}', '${newSpecification.description04}', '${newSpecification.V5}','${newSpecification.description05}','${newSpecification.V6}', '${newSpecification.description06}', '${newSpecification.V7}','${newSpecification.description07}','${newSpecification.V8}', '${newSpecification.description08}','${newSpecification.V9}', '${newSpecification.description09}')`,
+    `INSERT INTO customise (customiseid,userid,view1,description01,view2,description02,view3,description03,view4,description04,view5,description05,view6,description06,view7,description07,view8,description08,view9,description09,columns) VALUES ('${newSpecification.customiseid}','${newSpecification.userid}', '${newSpecification.V1}', '${newSpecification.description01}','${newSpecification.V2}', '${newSpecification.description02}', '${newSpecification.V3}','${newSpecification.description03}','${newSpecification.V4}', '${newSpecification.description04}', '${newSpecification.V5}','${newSpecification.description05}','${newSpecification.V6}', '${newSpecification.description06}', '${newSpecification.V7}','${newSpecification.description07}','${newSpecification.V8}', '${newSpecification.description08}','${newSpecification.V9}', '${newSpecification.description09}', '${newSpecification.columns}')`,
     res
   );
   res.status(201).json({ status: "user created" });

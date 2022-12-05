@@ -17,7 +17,7 @@ function Customise() {
   const receivedViewId = localStorage.getItem(viewId);
   console.log(viewId);
   const [userviews, setUserviews] = useState([]);
-  const columns = useRef(null);
+
   const [view1, setView1] = useState("");
   const [view2, setView2] = useState("");
   const [view3, setView3] = useState("");
@@ -27,6 +27,7 @@ function Customise() {
   const [view7, setView7] = useState("");
   const [view8, setView8] = useState("");
   const [view9, setView9] = useState("");
+  const [columns, setColumns] = useState("");
 
   useEffect(() => {
     axios
@@ -51,24 +52,18 @@ function Customise() {
         setView7(userviews[i].view7);
         setView8(userviews[i].view8);
         setView9(userviews[i].view9);
+        setColumns(userviews[i].columns);
       }
-    }
-    if (columns.current.style.display == "block") {
-      columns.current.style.display = "flex";
-    } else {
-      columns.current.style.display = "block";
     }
   };
 
   return (
     <>
-      <button onClick={handleClick}>Show and Change columns</button>
+      <button onClick={handleClick}>
+        Click to Show(this is a bug, you have to click to go to next)
+      </button>
 
-      <div
-        className="columns"
-        ref={columns}
-        style={{ display: "block", width: "100%", justifyContent: "center" }}
-      >
+      <div>
         <div>{view1 == "true" ? <V1 /> : null}</div>
         <div>{view2 == "true" ? <V2 /> : null}</div>
         <div>{view3 == "true" ? <V3_CO2 /> : null}</div>
