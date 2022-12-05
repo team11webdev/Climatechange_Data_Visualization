@@ -13,6 +13,14 @@ function App() {
   const [userJWT, setUserJWT] = useState(null);
   const [viewid, setViewid] = useState(null);
 
+  // When page is reloaded the user is not logged out:
+  window.onload = function() {
+    if (sessionStorage.getItem("jwt") != null) {
+      const newuser=sessionStorage.getItem("jwt");
+      setUserJWT(newuser);
+    }
+  }
+
   let authRoutes = (
     <>
       <Route
