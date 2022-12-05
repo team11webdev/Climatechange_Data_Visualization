@@ -16,9 +16,9 @@ const port = 3001;
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 //-------SIGNUP (create a new user and store it in the database with unique id and hashed password)---------
 app.post("/signup", (req, res) => {
-  console.log(req.body);
 
   if ("username" in req.body == false) {
     res.status(400);
@@ -55,6 +55,7 @@ app.post("/signup", (req, res) => {
 
   res.status(201).json({ status: "user created" });
 });
+
 /*********************************************
  * HTTP Basic Authentication
  * Passport module used
@@ -94,49 +95,40 @@ const jwtOptions = {
 };
 passport.use(
   new JwtStrategy(jwtOptions, function (jwt_payload, done) {
-  
     done(null, jwt_payload);
   })
 );
 
 app.post(
-  "/jwtLogin",
-  //check username and password
-  passport.authenticate("basic", { session: false }),
-  (req, res) => {
-    
-
+  "/jwtLogin", passport.authenticate("basic", { session: false }), (req, res) => {
     // generate JWT token
+
     const payload = {
       user: {
         id: req.user.User_id,
         Email: req.user.Email,
-        Username: req.user.Username,
+        Username: req.user.Username
       },
     };
     const secretKey = "mysecretkey";
     const options = {
-      expiresIn: "1d",
+      expiresIn: "1d"
     };
     const generatedJWT = jwt.sign(payload, secretKey, options);
     //store JWT at localStorage
 
     // send JWT as a response
-
     res.json({ jwt: generatedJWT });
   }
 );
 
-//get user-pecific view
+//get user-specific view
 app.get(
-  "/user_specific",
-  passport.authenticate("jwt", { session: false }),
-
-  (req, res) => {
-  
+  "/user_specific", passport.authenticate("jwt", { session: false }), (req, res) => {
     res.send("Hello protected world");
   }
 );
+
 app.post("/create", (req, res) => {
   const newSpecification = {
     customiseid: uuidv4(),
@@ -167,6 +159,7 @@ app.post("/create", (req, res) => {
   );
   res.status(201).json({ status: "user created" });
 });
+
 // delete user
 app.post("/delete", async function (req, res) {
   const deleteUser = req.body.userid;
@@ -177,6 +170,7 @@ app.post("/delete", async function (req, res) {
     res.send(result);
   });
 });
+
 // read data from database v1 v2
 app.get("/", async function (req, res) {
   let sql = "SELECT * FROM v1_v2";
@@ -213,24 +207,6 @@ app.get("/v4_v10", async function (req, res) {
   });
 });
 
-// V9 Sectors
-app.get("/v9_sectors", async function (req, res) {
-  let sql = "SELECT * FROM v9_sectors";
-  connection.query(sql, function (err, result) {
-    if (err) throw err;
-    res.send(result);
-  });
-});
-
-// V9 Sub-Sectors
-app.get("/v9_sub_sectors", async function (req, res) {
-  let sql = "SELECT * FROM v9_sub_sectors";
-  connection.query(sql, function (err, result) {
-    if (err) throw err;
-    res.send(result);
-  });
-});
-
 // read data from database v5
 app.get("/v5", async function (req, res) {
   let sql = "SELECT * FROM v5";
@@ -259,6 +235,7 @@ app.get("/v7", async function (req, res) {
     res.send(result);
   });
 });
+
 //read data from database v8
 app.get("/v8", async function (req, res) {
   let sql = "SELECT * FROM v8 ";
@@ -268,15 +245,33 @@ app.get("/v8", async function (req, res) {
   });
 });
 
-//read data from database v8
+// V9 Sectors
+app.get("/v9_sectors", async function (req, res) {
+  let sql = "SELECT * FROM v9_sectors";
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// V9 Sub-Sectors
+app.get("/v9_sub_sectors", async function (req, res) {
+  let sql = "SELECT * FROM v9_sub_sectors";
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+// get the decriptions of the charts from the database
 app.get("/description", async function (req, res) {
   let sql = "SELECT * FROM description ";
   connection.query(sql, function (err, result) {
     if (err) throw err;
-
     res.send(result);
   });
 });
+
 app.get("/list", async function (req, res) {
   let sql = `SELECT * FROM customise `;
   connection.query(sql, function (err, result) {
@@ -286,8 +281,6 @@ app.get("/list", async function (req, res) {
   });
 });
 
-
-//------------------------------------------------------------------------------------------------------
 //listen method
 app.listen(port, function (err) {
   console.log("listening...." + port);
