@@ -2,12 +2,16 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function NavBar(props) {
 
+  const navigate = useNavigate();
+
   const handleLogOut = async (event) => {
     try {
-      localStorage.removeItem("jwt");
+      sessionStorage.removeItem("jwt");
+      navigate("/", { replace: true });
       window.location.reload(false);
     } catch (error) {
       console.error(error);
@@ -32,7 +36,7 @@ function NavBar(props) {
             <Link className="nav-link" to="/user_specific">
               Create Custom View
             </Link>
-            {localStorage.getItem("jwt") != null ? 
+            {sessionStorage.getItem("jwt") != null ? 
               <Link className="nav-link" to="/" onClick={handleLogOut}> Logout </Link>
               : <Link className="nav-link" to="/login"> Login/Signup </Link>
             }
