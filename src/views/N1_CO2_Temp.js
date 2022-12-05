@@ -4,7 +4,7 @@ import V3_CO2 from "../components/V3_CO2";
 import V4_CO2 from "../components/V4_CO2";
 import V5 from "../components/V5_CO2";
 import V6 from "../components/V6_CO2";
-import V7 from "../components/V7_V10_Carbon";
+//import V7 from "../components/V7_V10_Carbon";
 import colToggle from "../components/colToggle.js";
 
 function N1_CO2_TEMP() {

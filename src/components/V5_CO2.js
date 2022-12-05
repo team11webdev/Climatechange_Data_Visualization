@@ -39,7 +39,6 @@ const V5 = () => {
     axios
       .get(URL)
       .then((response) => {
-        console.log(response.data);
         setChart_gasage(response.data);
       })
       .catch((error) => {

@@ -62,7 +62,7 @@ function N3_USER_SPECIFIC(props) {
       const result = await axios.post(Constants.API_ADDRESS + "/delete", {
         userid: decodedToken.user.id,
       });
-
+      sessionStorage.removeItem("jwt");
       setTimeout(() => {
         navigate("/", { replace: true });
       }, 1500);
@@ -75,13 +75,13 @@ function N3_USER_SPECIFIC(props) {
   return (
     <>
       <div>
-        <h2>Hi, {decodedToken.user.Username},</h2>
-        <List />
-
-        <h3>you can make your own visualization and share it with others!</h3>
+        <h2>Hi, {decodedToken.user.Username}!</h2>
         <form onSubmit={handledelete}>
-          <button>Delete my counte</button>
+          <button>Delete user</button>
         </form>
+        <List />
+        <h3>Make your own custom view by selecting the charts you want below:</h3>
+        <h6> After creation you can share the custom views with others!</h6>
       </div>
       <form onSubmit={handleSubmit}>
         <input
@@ -93,7 +93,7 @@ function N3_USER_SPECIFIC(props) {
         Global historical surface temperature anomalies from January 1850
         onwards
         <br />
-        <input type="text" name="description01"></input>
+        <input type="text" name="description01" placeholder="Add description"></input>
         <br />
         <input
           type="checkbox"
@@ -103,7 +103,7 @@ function N3_USER_SPECIFIC(props) {
         />
         Northern Hemisphere 2,000-year temperature reconstruction
         <br />
-        <input type="text" name="description02"></input>
+        <input type="text" name="description02" placeholder="Add description"></input>
         <br />
         <input
           type="checkbox"
@@ -113,7 +113,7 @@ function N3_USER_SPECIFIC(props) {
         />
         Atmospheric CO2 concentrations from Mauna Loa measurements starting 1958
         <br />
-        <input type="text" name="description03"></input>
+        <input type="text" name="description03" placeholder="Add description"></input>
         <br />
         <input
           type="checkbox"
@@ -126,7 +126,7 @@ function N3_USER_SPECIFIC(props) {
         <br />
         Human Evolution and Activities
         <br />
-        <input type="text" name="description04"></input>
+        <input type="text" name="description04" placeholder="Add description"></input>
         <br />
         <input
           type="checkbox"
@@ -136,7 +136,7 @@ function N3_USER_SPECIFIC(props) {
         />
         Vostok Ice Core CO2 measurements,417160 - 2342 years
         <br />
-        <input type="text" name="description05"></input>
+        <input type="text" name="description05" placeholder="Add description"></input>
         <br />
         <input
           type="checkbox"
@@ -146,7 +146,7 @@ function N3_USER_SPECIFIC(props) {
         />
         Ice core 800k year composite study CO2 measurements
         <br />
-        <input type="text" name="description06"></input>
+        <input type="text" name="description06" placeholder="Add description"></input>
         <br />
         <input
           type="checkbox"
@@ -158,7 +158,7 @@ function N3_USER_SPECIFIC(props) {
         <br />
         Human Evolution and Activities
         <br />
-        <input type="text" name="description07"></input>
+        <input type="text" name="description07" placeholder="Add description"></input>
         <br />
         <input
           type="checkbox"
@@ -168,7 +168,7 @@ function N3_USER_SPECIFIC(props) {
         />
         CO2 emissions by country
         <br />
-        <input type="text" name="description08"></input>
+        <input type="text" name="description08" placeholder="Add description"></input>
         <br />
         <input
           type="checkbox"
@@ -178,7 +178,7 @@ function N3_USER_SPECIFIC(props) {
         />
         CO2 emissions by sectors
         <br />
-        <input type="text" name="description09"></input>
+        <input type="text" name="description09" placeholder="Add description"></input>
         <br />
         <button type="submit" name="">
           Create

@@ -39,7 +39,6 @@ const V7 = () => {
     axios
       .get(URL)
       .then((response) => {
-        console.log(response.data);
         setChart_co2(response.data);
       })
       .catch((error) => {

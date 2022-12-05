@@ -8,7 +8,7 @@ const URL = Constants.API_ADDRESS + "/list";
 
 function List(props) {
   const navigate = useNavigate();
-  const token = localStorage.getItem("jwt");
+  const token = sessionStorage.getItem("jwt");
   const decodedToken = jwt_decode(token);
   const user = decodedToken.user.id;
   const [userviews, setUserviews] = useState([]);
@@ -35,14 +35,14 @@ function List(props) {
   console.log(list);
   const handleClick = async (event) => {
     console.log(event.target.text);
-    localStorage.setItem(viewId, event.target.text);
-    const receivedViewId = localStorage.getItem(viewId);
+    sessionStorage.setItem(viewId, event.target.text);
+    const receivedViewId = sessionStorage.getItem(viewId);
     console.log(receivedViewId);
   };
 
   return (
     <div>
-      <h3>My List</h3>
+      <h3>List of custom views</h3>
       <ol>
         {list.map((view) => (
           <li key={view.customiseid}>
