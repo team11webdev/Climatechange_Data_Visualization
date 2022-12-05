@@ -28,16 +28,16 @@ export default function AUTH(props) {
     event.preventDefault();
     setSignupProcessState("processing");
     try {
-      const result = await axios.post(Constants.API_ADDRESS + "/signup", {
-        email: event.target.email.value,
-        username: event.target.username.value,
-        password: event.target.password.value,
-      });
-      console.log(result);
-      setSignupProcessState("signupSuccess");
-      setTimeout(() => {
-        navigate("/", { replace: true });
-      }, 1500);
+        const result = await axios.post(Constants.API_ADDRESS + "/signup", {
+          email: event.target.email.value,
+          username: event.target.username.value,
+          password: event.target.password.value,
+        });
+        console.log(result);
+        setSignupProcessState("signupSuccess");
+        setTimeout(() => {
+          navigate("/", { replace: true });
+        }, 1500);
     } catch (error) {
       setSignupProcessState("signupFailure");
       console.error(error);
@@ -61,8 +61,8 @@ export default function AUTH(props) {
       //do something with the result
    
       const receivedJWT = result.data.jwt;
-      localStorage.setItem("jwt", receivedJWT);
-      const token = localStorage.getItem("jwt");
+      sessionStorage.setItem("jwt", receivedJWT);
+      const token = sessionStorage.getItem("jwt");
       props.login(token);
       navigate("/", { replace: true });
     } catch (error) {
