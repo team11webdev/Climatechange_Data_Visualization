@@ -21,7 +21,7 @@ function NavBar(props) {
   const checkLoginStatus = async (event) => {
     try {
       if(props.userLoggedIn === false){
-        alert('Please login first to access this page!')
+        alert('Please login first to access this page!');
       }
     } catch (error) {
       console.error(error);

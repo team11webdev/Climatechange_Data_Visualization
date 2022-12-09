@@ -14,7 +14,7 @@ const URL = Constants.API_ADDRESS + "/list";
 
 function Customise() {
   const viewId = "";
-  const receivedViewId = localStorage.getItem(viewId);
+  const receivedViewId = sessionStorage.getItem(viewId);
   console.log(viewId);
   const [userviews, setUserviews] = useState([]);
 
