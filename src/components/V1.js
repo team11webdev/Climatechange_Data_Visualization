@@ -30,7 +30,7 @@ const V1 = () => {
       
       })
       .catch((error) => {
-        alert(error.response.data.error);
+        alert(error);
       });
   }, []);
 

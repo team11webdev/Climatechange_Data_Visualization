@@ -78,9 +78,11 @@ passport.use(
           // if passwords match, then proceed to route handler (the proceed resource)
           if (bcrypt.compareSync(password, userInfo[0].password) == true) {
             done(null, userInfo[0]);
+            return
           } else {
             // reject the request
             done(null, false);
+            return;
           } 
         }
       }

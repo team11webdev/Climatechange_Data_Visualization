@@ -60,7 +60,7 @@ function App() {
         {authRoutes}
 
         <Route path="*" element={<N1_CO2_TEMP />} />
-        <Route path="/customise/:id" element={<Customise viewId={viewid} />} />
+        <Route path="/customise/:id" element={<Customise/>} />
       </Routes>
     </>
   );
