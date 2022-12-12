@@ -18,6 +18,16 @@ function NavBar(props) {
     }
   };
 
+  const checkLoginStatus = async (event) => {
+    try {
+      if(props.userLoggedIn === false){
+        alert('Please login first to access this page!');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Navbar expand="lg" className="whole-nav">
       <Container>
@@ -33,7 +43,7 @@ function NavBar(props) {
             <Link className="nav-link" to="/emissions">
               Emission Sources
             </Link>
-            <Link className="nav-link" to="/user_specific">
+            <Link className="nav-link" to="/user_specific" onClick={checkLoginStatus}>
               Create Custom View
             </Link>
             {sessionStorage.getItem("jwt") != null ? 

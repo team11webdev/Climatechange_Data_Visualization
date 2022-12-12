@@ -52,7 +52,7 @@ function V8() {
 
         console.log(json);
       } else {
-        alert("Error.");
+        alert("Error." );
         console.log(response);
       }
     } catch (err) {
@@ -93,6 +93,8 @@ function V8() {
   return (
     <div className="chart-info-container">
       <h3  className="chart-info">{title}</h3>
+      <h3>V8-{title}</h3>
+      <p>Please input a country name such as : Finland, USA, Australia to show a sigle country's data</p>
       <div className="chart-container">
         <Line data={data} options={options} height={400} width={850} />
         <form onSubmit={show}  className="chart-info">

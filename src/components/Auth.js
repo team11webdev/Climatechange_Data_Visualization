@@ -9,6 +9,7 @@ import Constants from "../Constants.json";
 
 export default function AUTH(props) {
   const [signupProcessState, setSignupProcessState] = useState("default");
+  const [errorMessage, setErrorMessage] = useState("")
 
   let [authMode, setAuthMode] = useState("login");
   const changeAuthMode = () => {
@@ -33,14 +34,13 @@ export default function AUTH(props) {
           username: event.target.username.value,
           password: event.target.password.value,
         });
-        console.log(result);
         setSignupProcessState("signupSuccess");
         setTimeout(() => {
           navigate("/", { replace: true });
         }, 1500);
     } catch (error) {
       setSignupProcessState("signupFailure");
-      console.error(error);
+      setErrorMessage(error.response.data.message);
     }
   };
 
@@ -59,14 +59,19 @@ export default function AUTH(props) {
         }
       );
       //do something with the result
-   
       const receivedJWT = result.data.jwt;
       sessionStorage.setItem("jwt", receivedJWT);
       const token = sessionStorage.getItem("jwt");
       props.login(token);
-      navigate("/", { replace: true });
+      navigate("/user_specific", { replace: true });
     } catch (error) {
-      console.error(error);
+      if(error.response.data === 'Unauthorized') {
+        //console.log(error.response.data)
+        alert("Wrong username or password!");
+      } else {
+        alert("Something went wrong.. Try again!");
+        //console.error(error);
+      }
     }
   };
 
@@ -86,7 +91,15 @@ export default function AUTH(props) {
       signupUIControls = <span>User succesfully created</span>;
       break;
     case "signupFailure":
-      signupUIControls = <span>Something went wrong</span>;
+      signupUIControls = (
+        <>
+          <span>Something went wrong: </span>
+          <br/>
+          <span>{errorMessage}</span>
+          <br/>
+          <Button variant="primary" type="submit"> Submit </Button>
+        </>
+      );
       break;
   }
 

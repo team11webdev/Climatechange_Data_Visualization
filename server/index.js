@@ -69,19 +69,21 @@ passport.use(
       `SELECT * FROM user WHERE username="${username}"`,
       function (err, results, fields) {
         const userInfo = results;
-        console.log(userInfo);
-        // if match is found , comparte the passwords
-        if (userInfo != null) {
+        //if user is not found in the database
+        if (userInfo[0] == null) {
+          // reject the request
+          done(null, false);
+          // if match is found , comparte the passwords
+        } else if(userInfo != null) {
           // if passwords match, then proceed to route handler (the proceed resource)
           if (bcrypt.compareSync(password, userInfo[0].password) == true) {
             done(null, userInfo[0]);
+            return
           } else {
             // reject the request
             done(null, false);
-          }
-        } else {
-          // reject the request
-          done(null, false);
+            return;
+          } 
         }
       }
     );
@@ -287,6 +289,16 @@ app.get("/list", async function (req, res) {
   connection.query(sql, function (err, result) {
     if (err) throw err;
 
+    res.send(result);
+  });
+});
+
+//delete view
+app.post("/deleteview", async function (req, res) {
+  const deleteView = req.body.viewid;
+  let sql = `DELETE FROM customise WHERE customiseid='${deleteView}'`;
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
     res.send(result);
   });
 });
