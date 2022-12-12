@@ -16,6 +16,7 @@ const URL_DES = "http://localhost:3001/description";
 
 const V7 = () => {
   const [chart_co2, setChart_co2] = useState([]);
+  const [currentEvent, setCurrentEvent] = useState([]);
   const [title, setTitle] = useState([]);
   const [description, setDescription] = useState([]);
   const [data_link, setData_link] = useState([]);
@@ -90,6 +91,23 @@ const V7 = () => {
   };
 
   var options = {
+    onHover: (e, activeElement) => {
+      if(activeElement[0] === undefined){
+        return null;
+      } else {
+      //let datasetIndex = activeElement[0].datasetIndex
+      let dataIndex = activeElement[0].index;
+      //let datasetLabel = e.chart.data.datasets[datasetIndex].label
+      //let value = e.chart.data.datasets[datasetIndex].data[dataIndex]
+      //let label = e.chart.data.labels[dataIndex]
+      //console.log("In click", datasetLabel, label, value, dataIndex)
+      chart_co2.map((s, indx) => {
+        if (indx === dataIndex) {
+          setCurrentEvent(s.notable_events_desc);
+        }
+        return null;
+      });
+    }},
     maintainAspectRatio: false,
     scales: {
       y: {
@@ -128,7 +146,7 @@ const V7 = () => {
             return context.label;
           },
           afterLabel: (context) => {
-            return "This is the index: " + context.dataIndex;
+            return currentEvent;
           },
         },
       },
@@ -136,7 +154,7 @@ const V7 = () => {
   };
 
   return (
-    <div className="chart-info-container">
+    <div className="chart-info">
       <h3 className="chart-info">V7-{title}</h3>
       <div className="chart-container">
         <Line data={data} options={options} />

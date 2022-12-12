@@ -92,24 +92,25 @@ function Customise() {
       </button>
 
       <div className={colToggle(columns)}>
-        <div>{view1 == "true" ? <V1 /> : null}</div>
-        <div>{view1 == "true" ? <p>{description01}</p> : null}</div>
-        <div>{view2 == "true" ? <V2 /> : null}</div>
-        <div>{view2 == "true" ? <p>{description02}</p> : null}</div>
-        <div>{view3 == "true" ? <V3_CO2 /> : null}</div>
-        <div>{view3 == "true" ? <p>{description03}</p> : null}</div>
-        <div>{view4 == "true" ? <V4_CO2 /> : null}</div>
-        <div>{view4 == "true" ? <p>{description04}</p> : null}</div>
-        <div>{view5 == "true" ? <V5_CO2 /> : null}</div>
-        <div>{view5 == "true" ? <p>{description05}</p> : null}</div>
-        <div>{view6 == "true" ? <V6_CO2 /> : null}</div>
-        <div>{view6 == "true" ? <p>{description06}</p> : null}</div>
-        <div>{view7 == "true" ? <V7 /> : null}</div>
-        <div>{view7 == "true" ? <p>{description07}</p> : null}</div>
-        <div>{view8 == "true" ? <V8 /> : null}</div>
-        <div>{view8 == "true" ? <p>{description08}</p> : null}</div>
-        <div>{view9 == "true" ? <V9_CO2_SECTOR /> : null}</div>
-        <div>{view9 == "true" ? <p>{description09}</p> : null}</div>
+      
+        {view1 == "true" ? <div className="chart-info-container"><V1 /><p className="chart-info">{description01}</p></div> : null}
+        
+        {view2 == "true" ? <div className="chart-info-container"><V2 /><p className="chart-info">{description02}</p></div> : null}
+        
+        {view3 == "true" ? <div className="chart-info-container"><V3_CO2 /><p className="chart-info">{description03}</p></div> : null}
+        
+        {view4 == "true" ? <div className="chart-info-container"><V4_CO2 /><p className="chart-info">{description04}</p></div> : null}
+        
+        {view5 == "true" ? <div className="chart-info-container"><V5_CO2 /><p className="chart-info">{description05}</p></div> : null}
+        
+        {view6 == "true" ? <div className="chart-info-container"><V6_CO2 /><p className="chart-info">{description06}</p></div> : null}
+        
+        {view7 == "true" ? <div className="chart-info-container"><V7 /><p className="chart-info">{description07}</p></div> : null}
+
+        {view8 == "true" ? <div className="chart-info-container"><V8 /><p className="chart-info">{description08}</p></div> : null}
+
+        {view9 == "true" ? <div className="chart-info-container"><V9_CO2_SECTOR /><p className="chart-info">{description09}</p></div> : null}
+
       </div>
 
 

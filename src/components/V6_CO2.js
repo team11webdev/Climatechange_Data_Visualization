@@ -88,7 +88,7 @@ const V6 = () => {
   };
 
   return (
-    <div className="chart-info-container">
+    <div className="chart-info">
       <h3 className="chart-info">V6-{title}</h3>
         <div className="chart-container">
             <Line data={data} options={options}/>

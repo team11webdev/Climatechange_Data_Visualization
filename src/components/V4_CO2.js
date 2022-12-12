@@ -142,7 +142,7 @@ export default function V4_CO2() {
   };
 
   return (
-    <div className="chart-info-container">
+    <div className="chart-info">
       <h4 className="chart-info">V4-{title}</h4>
       <div className="chart-container">
         <Line data={data} options={options} />

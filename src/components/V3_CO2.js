@@ -103,7 +103,7 @@ const V3_CO2 = () => {
 
   //console.log(ref_btn.current.innerHTML);
   return (
-    <div className="chart-info-container">
+    <div className="chart-info">
       <h4 className="chart-info">V3-{title}</h4>
       <div
         className="chart-container"

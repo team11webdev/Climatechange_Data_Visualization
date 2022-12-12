@@ -198,7 +198,7 @@ export default function V9_CO2_SECTOR() {
   };
 
   return (
-    <div className="chart-info-container">
+    <div className="chart-info">
       <h3 className="chart-info">V9-{title}</h3>
       <div className="chart-container">
         <Doughnut data={sectorData} options={options} />

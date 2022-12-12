@@ -125,7 +125,7 @@ const V1 = () => {
 
   //console.log(ref_btn.current.innerHTML);
   return (
-    <div className="chart-info-container">
+    <div className="chart-info">
       <h3 className="chart-info">v1-{title}</h3>
       <div
         ref={ref_year}

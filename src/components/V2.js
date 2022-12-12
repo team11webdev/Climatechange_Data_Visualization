@@ -74,7 +74,7 @@ const V1_v2 = () => {
 
   //console.log(ref_btn.current.innerHTML);
   return (
-    <div className="chart-info-container">
+    <div className="chart-info">
       <h3 className="chart-info">V2-{title}</h3>
       <div style={{ display: "block" }} className="chart-container">
         <Line data={data_year} options={options} height={400} width={850} />
