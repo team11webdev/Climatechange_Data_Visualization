@@ -6,7 +6,7 @@ import colToggle from "../components/colToggle";
 function N2_EMISSION() {
   return (
     <>
-      <div className={colToggle()}>
+      <div className={colToggle("one")}>
         <V8/>
         <V9_CO2_SECTOR/>
       </div>

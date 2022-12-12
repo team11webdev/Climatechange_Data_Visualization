@@ -3,12 +3,12 @@
  * Currently just a true/false statement, but this should recieve data from the custom view creator
  */
 
-function colToggle() {
+function colToggle(num) {
     var rowNum = "row-1"
-    if (true) {
-      rowNum = "row-1"
-    } else {
+    if (num === "two") {
       rowNum = "row-2"
+    } else {
+      rowNum = "row-1"
     }
     
     return rowNum

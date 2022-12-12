@@ -75,16 +75,19 @@ const V1_v2 = () => {
   //console.log(ref_btn.current.innerHTML);
   return (
     <div className="chart-info-container">
-      <h3>V2-{title}</h3>
+      <h3 className="chart-info">V2-{title}</h3>
       <div style={{ display: "block" }} className="chart-container">
         <Line data={data_year} options={options} height={400} width={850} />
       </div>
 
-      <div className="chart-info">{description.description}</div>
+      <div className="chart-info">
         <p>Introduction: {description}</p>
         <a href={data_link} className="chart-info">Data source</a>
         <br />
         <a href={description_link} className="chart-info">Data description</a>
+
+      </div>
+
         
     </div>
    

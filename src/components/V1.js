@@ -126,7 +126,7 @@ const V1 = () => {
   //console.log(ref_btn.current.innerHTML);
   return (
     <div className="chart-info-container">
-      <h3>v1-{title}</h3>
+      <h3 className="chart-info">v1-{title}</h3>
       <div
         ref={ref_year}
         style={{ display: "block" }}
@@ -143,25 +143,30 @@ const V1 = () => {
         <Line data={data_month} options={options} height={400} width={850} />
       </div>
 
-      <button
-        onClick={() =>
-          ref_btn.current.innerHTML === "Go Annual"
-            ? ((ref_year.current.style.display = "block"),
-              (ref_month.current.style.display = "none"),
-              (ref_btn.current.innerHTML = "Go Monthly"))
-            : ((ref_year.current.style.display = "none"),
-              (ref_btn.current.innerHTML = "Go Annual"),
-              (ref_month.current.style.display = "block"))
-        }
-        ref={ref_btn}
-      >
-        Go Monthly
-      </button>
-      <div className="chart-info">{description.description}</div>
+      
+      <div className="chart-info">
+        <button
+          onClick={() =>
+            ref_btn.current.innerHTML === "Go Annual"
+              ? ((ref_year.current.style.display = "block"),
+                (ref_month.current.style.display = "none"),
+                (ref_btn.current.innerHTML = "Go Monthly"))
+              : ((ref_year.current.style.display = "none"),
+                (ref_btn.current.innerHTML = "Go Annual"),
+                (ref_month.current.style.display = "block"))
+          }
+          ref={ref_btn}
+        >
+          Go Monthly
+        </button>
+
         <p>Introduction: {description}</p>
         <a href={data_link} className="chart-info">Data source</a>
         <br />
         <a href={description_link} className="chart-info">Data description</a>
+
+      </div>
+
         
     </div>
     

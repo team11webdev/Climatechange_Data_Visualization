@@ -10,12 +10,14 @@ import V7 from "../components/V7_V10_Carbon";
 import V8 from "../components/V8";
 import V9_CO2_SECTOR from "../components/V9_CO2_Sector";
 import Constants from "../Constants.json";
+import colToggle from "../components/colToggle";
 const URL = Constants.API_ADDRESS + "/list";
 
 function Customise() {
   const viewId = "";
-  const receivedViewId = localStorage.getItem(viewId);
+  const receivedViewId = sessionStorage.getItem(viewId);
   console.log(viewId);
+  console.log(receivedViewId)
   const [userviews, setUserviews] = useState([]);
 
   const [view1, setView1] = useState("");
@@ -34,13 +36,20 @@ function Customise() {
       .get(URL)
       .then((response) => {
         setUserviews(response.data);
+        console.log("these are the two")
+        console.log(response)
+        console.log(response.data)
+        console.log("end")
       })
       .catch((error) => {
         alert(error.response.data.error);
       });
   }, []);
 
+
   const handleClick = () => {
+    console.log("is the button working?")
+    
     for (let i = 0; i < userviews.length; i++) {
       if (userviews[i].customiseid == receivedViewId) {
         setView1(userviews[i].view1);
@@ -55,7 +64,10 @@ function Customise() {
         setColumns(userviews[i].columns);
       }
     }
+
+
   };
+  
 
   return (
     <>
@@ -63,19 +75,29 @@ function Customise() {
         Click to Show(this is a bug, you have to click to go to next)
       </button>
 
-      <div>
-        <div>{view1 == "true" ? <V1 /> : null}</div>
-        <div>{view2 == "true" ? <V2 /> : null}</div>
-        <div>{view3 == "true" ? <V3_CO2 /> : null}</div>
-        <div>{view4 == "true" ? <V4_CO2 /> : null}</div>
-        <div>{view5 == "true" ? <V5_CO2 /> : null}</div>
-        <div>{view6 == "true" ? <V6_CO2 /> : null}</div>
-        <div>{view7 == "true" ? <V7 /> : null}</div>
-        <div>{view8 == "true" ? <V8 /> : null}</div>
-        <div>{view9 == "true" ? <V9_CO2_SECTOR /> : null}</div>
+      <div className={colToggle(columns)}>
+       <div>
+        {view1 === "true" ? <V1 /> : null}
+        {view2 === "true" ? <V2 /> : null}
+        {view3 === "true" ? <V3_CO2 /> : null}
+        {view4 === "true" ? <V4_CO2 /> : null}
+        {view5 === "true" ? <V5_CO2 /> : null}
+        {view6 === "true" ? <V6_CO2 /> : null}
+        {view7 === "true" ? <V7 /> : null}
+        {view8 === "true" ? <V8 /> : null}
+        {view9 === "true" ? <V9_CO2_SECTOR /> : null}
+      </div>        
       </div>
+
+
     </>
   );
 }
 
 export default Customise;
+
+/**
+ *
+ * 
+ * 
+ */

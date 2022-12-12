@@ -143,19 +143,22 @@ export default function V4_CO2() {
 
   return (
     <div className="chart-info-container">
-      <h4>V4-{title}</h4>
+      <h4 className="chart-info">V4-{title}</h4>
       <div className="chart-container">
         <Line data={data} options={options} />
       </div>
-      <div className="chart-info">{description.description}</div>
-      <p>Introduction: {description}</p>
-      <a href={data_link} className="chart-info">
-        Data source
-      </a>
-      <br />
-      <a href={description_link} className="chart-info">
-        Data description
-      </a>
+      <div className="chart-info">
+        <p>Introduction: {description}</p>
+        <a href={data_link} className="chart-info">
+          Data source
+        </a>
+        <br />
+        <a href={description_link} className="chart-info">
+          Data description
+        </a>        
+      
+      </div>
+
     </div>
   );
 }

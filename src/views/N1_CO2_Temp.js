@@ -10,23 +10,17 @@ import colToggle from "../components/colToggle.js";
 function N1_CO2_TEMP() {
   return (
     <>
-      <div className={colToggle()}>
+      <div className={colToggle("one")}>
         <V1 />
         <V2 />
-      </div>
-      <div className={colToggle()}>
         <V3_CO2 />
         <V4_CO2 />
-      </div>
-      <div className={colToggle()}>
-      <V5 />
+        <V5 />
         <V6 />
-       
+       <V7 />
       </div>
-      <div className={colToggle()}>
         
-        <V7 />
-      </div>
+        
     </>
   );
 }

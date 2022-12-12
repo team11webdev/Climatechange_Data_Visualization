@@ -74,30 +74,71 @@ code {
   text-align: left;
 }
 
+.chart-info-container {
+  padding-top: 40px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+.chart-info {
+  text-align: center;
+  margin: 15px;
+}
+
+h3 h2 h1{
+  vertical-align: top;
+  text-align: center;
+}
+
 .chart-info a {
   color: var(--bs-teal);
   text-align: center;
 }
 
 
-
-
-.row-2 {
-  display: flex;
-  flex: 1;
+.row-1 {
+  max-width: 90%;
+  justify-content: center;
 }
+
+.row-1 .chart-info-container {
+  padding-left: 150px;
+}
+
 
 .row-2 .chart-info-container {
-  flex-direction: row;
+  display: inline-block;
   width: 50%;
-  overflow-x: hidden;
 }
 
 
+
+
+
+@media screen and (max-width: 1000px) {
+  .row-1 {
+    width: 95%;
+    padding-left: 30px;
+
+  }
+
+  .row-1 .chart-info-container {
+    padding-left: 100px;
+  }
+
+}
+
 @media screen and (max-width: 600px) {
-  .row-2 {
-    display: flex;
-    width: 100%;
+
+  .row-2 .chart-info-container {
+    display: inline-block;
+    width: 50%;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
   .chart-info-container{
