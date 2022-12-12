@@ -1,70 +1,128 @@
-# Getting Started with Create React App
+# Climate Change Data Visualization Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## The project developers
+The project is developed by the second-year Information Technology students from Oulu University of Applied Sciences: 
+-	**Elias Linna**, [GitHub account](https://github.com/eliastom)
+-	**Nenna-Leena Hänninen**, [GitHub account](https://github.com/nennahanninen)
+-	**Yinan Li**, [GitHub account](https://github.com/YinanLi1987)
 
-## Available Scripts
+We have been working together throughout the whole project and everyone has been equally involved in all the parts of the development process.
 
-In the project directory, you can run:
+## Introduction of the project
+This project is about creating a climate change data visualization application as part of the Advanced Web Applications Project-course. Eight charts show historical global temperature and CO2 changes in diverse ways. The user can create an account and login to the application. The user can then make customized views by including various charts, customized descriptions and share the link to these views with public and unique URLs. The finished application will be available on the public internet.
 
-### `npm start`
+## Description of the project
+The project has been developed by following Agile software development method and Kanban framework template in GitHub Projects has been used to implement it. Communication of our team has been constant throughout the project and the project progressed as expected. Our team has been meeting evenly on campus and remotely on Teams. Also, teacher meetings have been held weekly and everybody has been able to attend. Overall, our team has been self-organizing, communicative, and able to deliver well-functioning application based on the project requirements.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies used in the project
+-	User Interface: 
+    - **HTML & CSS**
+    - [**Bootstrap**](https://github.com/twbs/bootstrap#readme) 5.2.2
+    - [**React Bootstrap**](https://react-bootstrap.github.io/) 2.6.0
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-	Front-end Framework:
+    - [**React.js**](https://reactjs.org/) 18.2.0
 
-### `npm test`
+-	Back-end: 
+    - [**Node.js**](https://nodejs.org/en/) 19.0.1
+    - [**Express.js**](https://github.com/expressjs/express) 4.18.2
+    - [**Axios.js**](https://github.com/axios/axios#readme) 1.1.3
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-	Database:
+    - [**MySQL**](https://www.mysql.com/) 8.0.31
 
-### `npm run build`
+-	Data visualization:
+    - [**Chart.js**](https://www.chartjs.org/) 3.9.1
+    - [**react-chartjs-2**](https://github.com/reactchartjs/react-chartjs-2#readme) 4.3.1
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+-	Deployment:
+    - [**Google Cloud Platform**](https://cloud.google.com/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Tools used in the project
+-	UI design tool: [**Figma**](https://www.figma.com/)
+-	Code editor: [**Visual Studio Code**](https://code.visualstudio.com/)
+-	Database design tool: [**MySQL Workbench**](https://www.mysql.com/products/workbench/)
+-	Version control: [**Git**](https://git-scm.com/) **&** [**GitHub**](https://github.com/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## The architecture of the application
 
-### `npm run eject`
+![Application Architecture Image](./client/src/Images/ApplicationArchitecture.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Interface description
+The application consists of different views and Signup/Login functionality. These can be accessed through the navigation bar on top of the page:
+1.	Atmospheric CO2 and temperatures: 6 different kind of line charts displaying diverse climate change data
+2.	Emission sources: Line chart and doughnut chart displaying CO2 emissions data
+3.	Create a custom view: 
+    - This view can only be accessed as a logged in user
+    - User can create custom views including any of the available charts and include custom descriptions for them
+    - User can choose between two layouts, one column layout or two column layout
+    - One user can have many created visualization views with unique URL tags
+    - User can delete the visualization views created
+4.	User-specific visualization view: 
+    - This view is accessible without logging in and has a public address
+5.	Signup/Login
+    - A user is created by entering an email, username and password, which then enables logging in to the application
+    - The user is able to delete the user
+    - Deleting the user also deletes all visualization views of the user
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> Smallest supported window size is 600px horizontal.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## How to install and use the application (locally)
+**Step one:** 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Download the project / clone the project repository
+ 
+**Step two:** 
 
-## Learn More
+Within the root folder, install the following dependencies:
+- [**Axios.js**](https://github.com/axios/axios#readme) 1.1.3
+- [**Chart.js**](https://www.chartjs.org/) 3.9.1
+- [**react-chartjs-2**](https://github.com/reactchartjs/react-chartjs-2#readme) 4.3.1
+- [**jwt-decode**](https://github.com/auth0/jwt-decode#readme) 3.1.2	
+- [**Bootstrap**](https://github.com/twbs/bootstrap#readme) 5.2.2
+- [**react-dom**](https://www.npmjs.com/package/react-dom) 18.2.0	
+- [**react-router-dom**](https://www.npmjs.com/package/react-router-dom) 6.4.3
+ 
+**Step three:** 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Go to the server folder: 
+```
+npm init -y
+npm install express
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Install the following dependencies: 
+- [**bcrypt**](https://github.com/dcodeIO/bcrypt.js#readme) 2.4.3
+- [**body-parser**](https://github.com/expressjs/body-parser#readme) 1.20.1 
+- [**cors**](https://github.com/expressjs/cors#readme) 2.8.5
+- [**jsonwebtoken**](https://github.com/auth0/node-jsonwebtoken#readme) 8.5.1
+- [**mysql**](https://github.com/mysqljs/mysql#readme) 2.18.1
+- [**passport**](https://github.com/jaredhanson/passport#readme) 0.6.0
+- [**passport-http**](https://github.com/jaredhanson/passport-http#readme) 0.3.0
+- [**passport-jwt**](https://github.com/themikenicholson/passport-jwt#readme) 4.0.0
+- [**uuid**](https://github.com/uuidjs/uuid#readme) 9.0.0
+ 
+**Step four:**
 
-### Code Splitting
+Create the local database :
+-	Start mysql and import the *charttest.sql* file into your local database
+-	Create a *database.js* file inside the server folder as follows, and modify the ‘xxxx’ part as needed:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```
+const mysql = require("mysql"); 
+        const connection = mysql.createConnection({ 
+         host: "xxxx", 
+         user: "xxxx", 
+         password: "xxxx", 
+         database: "xxxx", 
+   }); 
 
-### Analyzing the Bundle Size
+module.exports = connection;
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**Step five:**
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To start the application, run the following command:
+```
+node app.js
+```
