@@ -46,7 +46,7 @@ The project has been developed by following Agile software development method an
 
 ## The architecture of the application
 
-![Application Architecture Image](./client/src/Images/ApplicationArchitecture.png)
+![Application Architecture Image](./src/Images/ApplicationArchitecture.png)
 
 ## Interface description
 The application consists of different views and Signup/Login functionality. These can be accessed through the navigation bar on top of the page:
