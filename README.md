@@ -121,8 +121,12 @@ module.exports = connection;
 ```
 
 **Step five:**
-
+    
 To start the application, run the following command:
 ```
-node app.js
+cd server
+node index.js
+cd ..
+npm start
+
 ```
