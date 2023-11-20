@@ -6,20 +6,24 @@ const bodyParser = require("body-parser");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
+const path = require("path");
 const BasicStrategy = require("passport-http").BasicStrategy;
 const jwt = require("jsonwebtoken");
 const JwtStrategy = require("passport-jwt").Strategy,
   ExtractJwt = require("passport-jwt").ExtractJwt;
 
-const port = 3001;
-
+const port = process.env.PORT || 3001;
+app.use(express.static(path.join(__dirname, "build")));
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 //-------SIGNUP (create a new user and store it in the database with unique id and hashed password)---------
 app.post("/signup", (req, res) => {
-
   if ("username" in req.body == false) {
     res.status(400);
     res.json({ status: "Missing username from body" });
@@ -74,16 +78,16 @@ passport.use(
           // reject the request
           done(null, false);
           // if match is found , comparte the passwords
-        } else if(userInfo != null) {
+        } else if (userInfo != null) {
           // if passwords match, then proceed to route handler (the proceed resource)
           if (bcrypt.compareSync(password, userInfo[0].password) == true) {
             done(null, userInfo[0]);
-            return
+            return;
           } else {
             // reject the request
             done(null, false);
             return;
-          } 
+          }
         }
       }
     );
@@ -101,19 +105,21 @@ passport.use(
 );
 
 app.post(
-  "/jwtLogin", passport.authenticate("basic", { session: false }), (req, res) => {
+  "/jwtLogin",
+  passport.authenticate("basic", { session: false }),
+  (req, res) => {
     // generate JWT token
 
     const payload = {
       user: {
         id: req.user.user_id,
         Email: req.user.email,
-        Username: req.user.username
+        Username: req.user.username,
       },
     };
     const secretKey = "mysecretkey";
     const options = {
-      expiresIn: "1d"
+      expiresIn: "1d",
     };
     const generatedJWT = jwt.sign(payload, secretKey, options);
     //store JWT at localStorage
@@ -125,7 +131,9 @@ app.post(
 
 //get user-specific view
 app.get(
-  "/user_specific", passport.authenticate("jwt", { session: false }), (req, res) => {
+  "/user_specific",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
     res.send("Hello protected world");
   }
 );
@@ -304,6 +312,6 @@ app.post("/deleteview", async function (req, res) {
 });
 
 //listen method
-app.listen(port, function (err) {
-  console.log("listening...." + port);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
