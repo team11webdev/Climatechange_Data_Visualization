@@ -1,5 +1,6 @@
 import React from "react";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,7 +8,7 @@ import Constants from "../Constants.json";
 import List from "../components/List";
 
 function N3_USER_SPECIFIC(props) {
-  const decodedToken = jwt_decode(props.jwt);
+  const decodedToken = jwtDecode(props.jwt);
 
   const navigate = useNavigate();
 
@@ -82,7 +83,9 @@ function N3_USER_SPECIFIC(props) {
           <button>Delete user</button>
         </form>
         <List />
-        <h3>Make your own custom view by selecting the charts you want below:</h3>
+        <h3>
+          Make your own custom view by selecting the charts you want below:
+        </h3>
         <h6> After creation you can share the custom views with others!</h6>
       </div>
       <form onSubmit={handleSubmit}>
@@ -95,7 +98,11 @@ function N3_USER_SPECIFIC(props) {
         Global historical surface temperature anomalies from January 1850
         onwards
         <br />
-        <input type="text" name="description01" placeholder="Add description"></input>
+        <input
+          type="text"
+          name="description01"
+          placeholder="Add description"
+        ></input>
         <br />
         <input
           type="checkbox"
@@ -105,7 +112,11 @@ function N3_USER_SPECIFIC(props) {
         />
         Northern Hemisphere 2,000-year temperature reconstruction
         <br />
-        <input type="text" name="description02" placeholder="Add description"></input>
+        <input
+          type="text"
+          name="description02"
+          placeholder="Add description"
+        ></input>
         <br />
         <input
           type="checkbox"
@@ -115,7 +126,11 @@ function N3_USER_SPECIFIC(props) {
         />
         Atmospheric CO2 concentrations from Mauna Loa measurements starting 1958
         <br />
-        <input type="text" name="description03" placeholder="Add description"></input>
+        <input
+          type="text"
+          name="description03"
+          placeholder="Add description"
+        ></input>
         <br />
         <input
           type="checkbox"
@@ -128,7 +143,11 @@ function N3_USER_SPECIFIC(props) {
         <br />
         Human Evolution and Activities
         <br />
-        <input type="text" name="description04" placeholder="Add description"></input>
+        <input
+          type="text"
+          name="description04"
+          placeholder="Add description"
+        ></input>
         <br />
         <input
           type="checkbox"
@@ -138,7 +157,11 @@ function N3_USER_SPECIFIC(props) {
         />
         Vostok Ice Core CO2 measurements,417160 - 2342 years
         <br />
-        <input type="text" name="description05" placeholder="Add description"></input>
+        <input
+          type="text"
+          name="description05"
+          placeholder="Add description"
+        ></input>
         <br />
         <input
           type="checkbox"
@@ -148,7 +171,11 @@ function N3_USER_SPECIFIC(props) {
         />
         Ice core 800k year composite study CO2 measurements
         <br />
-        <input type="text" name="description06" placeholder="Add description"></input>
+        <input
+          type="text"
+          name="description06"
+          placeholder="Add description"
+        ></input>
         <br />
         <input
           type="checkbox"
@@ -160,7 +187,11 @@ function N3_USER_SPECIFIC(props) {
         <br />
         Human Evolution and Activities
         <br />
-        <input type="text" name="description07" placeholder="Add description"></input>
+        <input
+          type="text"
+          name="description07"
+          placeholder="Add description"
+        ></input>
         <br />
         <input
           type="checkbox"
@@ -170,7 +201,11 @@ function N3_USER_SPECIFIC(props) {
         />
         CO2 emissions by country
         <br />
-        <input type="text" name="description08" placeholder="Add description"></input>
+        <input
+          type="text"
+          name="description08"
+          placeholder="Add description"
+        ></input>
         <br />
         <input
           type="checkbox"
@@ -180,7 +215,11 @@ function N3_USER_SPECIFIC(props) {
         />
         CO2 emissions by sectors
         <br />
-        <input type="text" name="description09" placeholder="Add description"></input>
+        <input
+          type="text"
+          name="description09"
+          placeholder="Add description"
+        ></input>
         <br />
         <select name="columns">
           <option value="one">One column</option>

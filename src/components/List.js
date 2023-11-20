@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
+
 import Constants from "../Constants.json";
 const URL = Constants.API_ADDRESS + "/list";
 
 function List(props) {
   const navigate = useNavigate();
   const token = sessionStorage.getItem("jwt");
-  const decodedToken = jwt_decode(token);
+  const decodedToken = jwtDecode(token);
   const user = decodedToken.user.id;
   const [userviews, setUserviews] = useState([]);
   const [viewId, setViewId] = useState("");
